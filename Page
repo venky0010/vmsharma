@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Professional Profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="assets/your_photo.jpg" alt="Your Photo" class="profile-photo">
+        <h1>Your Name</h1>
+        <p>AI Product Owner | Mechanical Engineer | Data Science Enthusiast</p>
+    </header>
+    
+    <section>
+        <h2>About Me</h2>
+        <p>
+            I am a Mechanical Engineering graduate with a Master’s degree in Industrial Engineering. 
+            My professional journey spans roles in machine learning research, analytics, and automation, 
+            leading to significant time savings and efficiency improvements for various organizations.
+        </p>
+    </section>
+
+    <section>
+        <h2>Education</h2>
+        <ul>
+            <li>Bachelor’s in Mechanical Engineering</li>
+            <li>Master’s in Industrial Engineering, University of Houston</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Professional Experience</h2>
+        <div class="experience">
+            <h3>AI Product Owner Intern at ENPRO</h3>
+            <p>Focusing on Gen AI solutions for business use cases.</p>
+        </div>
+        <div class="experience">
+            <h3>Machine Learning Researcher at Robert Bosch Centre for Data Science and AI</h3>
+            <p>Collaborated with Societe Generale, Tamil Nadu Education Department, CDAC to build and deploy analytics solutions.</p>
+        </div>
+        <div class="experience">
+            <h3>Intern at ASML San Diego</h3>
+            <p>Streamlined and automated preventive maintenance tasks for EUV proto machines in clean room.</p>
+        </div>
+        <div class="experience">
+            <h3>Intern at Garlock Sealing Technologies</h3>
+            <p>Built KPIs and dashboard to track production and automated the entire process.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Skills</h2>
+        <ul>
+            <li>Machine Learning</li>
+            <li>Data Analytics</li>
+            <li>Automation</li>
+            <li>KPI Development</li>
+            <li>Python, R, SQL</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Companies</h2>
+        <div class="company-logos">
+            <img src="assets/bosch_logo.png" alt="Robert Bosch Centre for Data Science and AI">
+            <img src="assets/societe_generale_logo.png" alt="Societe Generale">
+            <img src="assets/tamil_nadu_education_logo.png" alt="Tamil Nadu Education Department">
+            <img src="assets/cdac_logo.png" alt="CDAC">
+            <img src="assets/asml_logo.png" alt="ASML">
+            <img src="assets/garlock_logo.png" alt="Garlock Sealing Technologies">
+            <img src="assets/enpro_logo.png" alt="ENPRO">
+        </div>
+    </section>
+
+    <footer>
+        <p>Connect with me on <a href="https://www.linkedin.com/in/yourprofile">LinkedIn</a> | View my work on <a href="https://github.com/yourusername">GitHub</a></p>
+    </footer>
+</body>
+</html>
