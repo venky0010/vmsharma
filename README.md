@@ -22,10 +22,13 @@
             </div>
             
             <!-- Education Section -->
-            <div class="mt-8 text-center text-gray-300 text-sm">
+            <div class="mt-8 text-gray-300 text-sm">
                 <h3 class="text-lg font-semibold text-white">Education</h3>
+                <img src="/mnt/data/uh.png" alt="University of Houston" class="w-20 h-20 mx-auto mt-4">
                 <p class="mt-2">University of Houston</p>
                 <p class="text-sm">Masters in Industrial Engineering</p>
+                <div class="mt-6"></div>
+                <img src="/mnt/data/vtu.png" alt="Visvesvaraya Technological University" class="w-20 h-20 mx-auto mt-4">
                 <p class="mt-4">Visvesvaraya Technological University</p>
                 <p class="text-sm">Bachelors in Mechanical Engineering</p>
             </div>
