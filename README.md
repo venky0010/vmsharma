@@ -15,6 +15,20 @@
         .modal {
             transition: transform 0.3s ease-out, opacity 0.3s ease-out;
         }
+        .separator-line {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, white, transparent);
+            margin: 10px 0;
+        }
+        .justified-text {
+            text-align: justify;
+        }
+        .company-logo {
+            background: radial-gradient(circle, white 40%, transparent 100%);
+            padding: 10px;
+            border-radius: 6px;
+        }
     </style>
     <script>
         function showRecommendations() {
@@ -41,7 +55,7 @@
         <div class="w-full md:w-1/5 bg-gradient-to-b from-gray-700 to-black p-4 flex flex-col items-center text-center">
             <img src="myimage.jpeg" alt="Venkatesh Mohan Sharma" class="w-28 h-28 rounded-full border-4 border-gray-500">
             <h2 class="mt-3 text-base font-semibold">Venkatesh Mohan Sharma</h2>
-            <p class="mt-1 text-gray-300 text-xs">Redmond, Washington</p>
+            <p class="mt-1 text-gray-300 text-xs flex items-center">Redmond, Washington <img src="flag.png" alt="US Flag" class="w-5 h-3 ml-2"></p>
             <div class="mt-3 flex flex-row justify-center space-x-3 items-center text-xs">
                 <a href="https://www.linkedin.com/in/venkateshmsharma/" class="flex items-center space-x-1 text-blue-400 hover:text-blue-600">
                     <img src="linkedin.png" alt="LinkedIn" class="w-4 h-4">
@@ -52,10 +66,13 @@
                     <span>GitHub</span>
                 </a>
             </div>
+                
+                <p class="text-gray-400">Email: venkatesh23997@gmail.com</p>
             
             <!-- About Section -->
-            <div class="mt-4 text-gray-300 text-xs w-full text-left">
-                <p class="text-base">Experienced Product Owner with expertise in product management, stakeholder management, process improvement, data analytics, and automation. Skilled in using experimentation, machine learning, and data modeling to create statistical solutions. Proven ability to drive data-driven decisions by automating processes, generating insightful reports, and optimizing workflows. Passionate about sports, especially Manchester United and the Houston Astros.</p>
+            <div class="mt-6 text-gray-300 text-xs w-full text-left">
+                <h3 class="text-sm font-semibold text-white">About Me</h3>
+                <p class="text-base justified-text">Results-oriented Product Owner with expertise in AI, Automation, and BPM solutions. Skilled in product management, stakeholder management, machine learning, and data analytics. Proven ability to deliver scalable, user-centric solutions by aligning technical  capabilities with business needs. Experienced in process documentation, agile methodologies, and iterative product development. Adept at leveraging experimentation, machine learning, and data modeling to optimize workflows and drive data-driven decision making across organizations. Outside of work, I am passionate about sports and enjoy following Manchester United and the Houston Astros.</p>
             </div>
             
             <!-- Education Section -->
@@ -86,7 +103,9 @@
                 <h3 class="text-lg font-semibold text-white mb-4">Experiences</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-grow">
                     <div class="flex items-center">
-                        <img src="enpro.png" alt="EnPro" class="w-20 h-auto mr-3 object-contain">
+                        <div class="company-logo flex items-center">
+                            <img src="enpro.png" alt="EnPro" class="w-20 h-auto object-contain">
+                        </div>
                         <div class="w-1/2">
                             <h4 class="text-sm font-semibold">EnPro Industries</h4>
                             <p class="italic text-xs text-gray-300">Product Owner Intern</p>
@@ -107,7 +126,9 @@
                         </div>
                     </div>
                     <div class="flex items-center">
-                        <img src="garlock.png" alt="Garlock" class="w-20 h-auto mr-3 object-contain">
+                        <div class="company-logo flex items-center">
+                            <img src="garlock.png" alt="Garlock" class="w-20 h-auto mr-3 object-contain">
+                        </div>
                         <div class="w-1/2">
                             <h4 class="text-sm font-semibold">Garlock</h4>
                             <p class="italic text-xs text-gray-300">Industrial Engineering and Analytics Intern</p>
@@ -128,7 +149,9 @@
                         </div>
                     </div>
 		   <div class="flex items-center">
+			<div class="company-logo flex items-center">
                         <img src="asml.png" alt="ASML" class="w-20 h-auto mr-3 object-contain">
+			</div>
                         <div class="w-1/2">
                             <h4 class="text-sm font-semibold">ASML</h4>
                             <p class="italic text-xs text-gray-300">Data Analytics Intern</p>
@@ -186,7 +209,9 @@
                         </div>
                     </div>
                     <div class="flex items-center">
+			<div class="company-logo flex items-center">
                         <img src="doms.png" alt="Doms" class="w-20 h-auto mr-3 object-contain">
+			</div>
                         <div class="w-1/2">
                             <h4 class="text-sm font-semibold">Indian Institute of Technology, Madras</h4>
                             <p class="italic text-xs text-gray-300">Data Science Intern</p>
@@ -204,6 +229,9 @@
                 </div>
             </div>
             
+            <!-- Separator Line -->
+            <div class="separator-line"></div>
+
             <!-- Bottom Section -->
             <div class="w-full grid grid-cols-3 gap-4 mt-4">
                 <div class="bg-gray-800 p-4 text-center rounded-xl text-white font-semibold cursor-pointer" onclick="showRecommendations()">Recommendations</div>
