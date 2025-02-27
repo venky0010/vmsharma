@@ -109,7 +109,7 @@
                         <div class="w-1/2">
                             <h4 class="text-sm font-semibold">EnPro Industries</h4>
                             <p class="italic text-xs text-gray-300">Product Owner Intern</p>
-                            <p class="text-xs text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Hao Dinh</a></p>
+                            <p class="text-xs text-gray-400">Supervisor: <a href="https://www.linkedin.com/in/hndinh" class="text-blue-400">Hao Dinh</a></p>
                             <p class="text-sm text-gray-200">Projects:</p>
                             <ul class="list-disc pl-4 text-gray-200 text-xs">
                                 <li>Supply Chain Optimization</li>
@@ -132,7 +132,7 @@
                         <div class="w-1/2">
                             <h4 class="text-sm font-semibold">Garlock</h4>
                             <p class="italic text-xs text-gray-300">Industrial Engineering and Analytics Intern</p>
-                            <p class="text-xs text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Aldo Ovalle</a></p>
+                            <p class="text-xs text-gray-400">Supervisor: <a href="https://www.linkedin.com/in/aldoovalle" class="text-blue-400">Aldo Ovalle</a></p>
                             <p class="text-sm text-gray-200">Projects:</p>
                             <ul class="list-disc pl-4 text-gray-200 text-xs">
                                 <li>Continuous Improvement, Capacity Analysis and Automation</li>
