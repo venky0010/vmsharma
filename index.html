@@ -47,6 +47,14 @@
             document.getElementById('publicationModal').classList.add('hidden');
             document.getElementById('publicationModal').classList.remove('flex');
         }
+        function showResume() {
+            document.getElementById('resumeModal').classList.remove('hidden');
+            document.getElementById('resumeModal').classList.add('flex');
+        }
+        function closeResume() {
+            document.getElementById('resumeModal').classList.add('hidden');
+            document.getElementById('resumeModal').classList.remove('flex');
+        }
     </script>
 </head>
 <body class="bg-gray-900 text-white">
@@ -72,10 +80,7 @@
             <!-- About Section -->
             <div class="mt-6 text-gray-300 text-xs w-full text-left">
                 <h3 class="text-sm font-semibold text-white">About Me</h3>
-                <p class="text-base justified-text">Result oriented Product Owner with strong expertise in data analytics, continuous improvement, product management, automation and stakeholder management.
- Proven ability to collaborate with cross-functional teams, test hypotheses, and shape workstreams using analytics. Adept at automating
- processes, generating insightful reports, and optimizing workflows to drive innovation, continuous improvement and achieve targeted outcomes. Proactive, agile, and
- adaptable with excellent communication skills. Outside of work, I am passionate about sports and enjoy following the Houston Astros.</p>
+                <p class="text-base justified-text">Results-oriented Product Owner with expertise in AI, Automation, and BPM solutions. Skilled in product management, stakeholder management, machine learning, and data analytics. Proven ability to deliver scalable, user-centric solutions by aligning technical  capabilities with business needs. Experienced in process documentation, agile methodologies, and iterative product development. Adept at leveraging experimentation, machine learning, and data modeling to optimize workflows and drive data-driven decision making across organizations. Outside of work, I am passionate about sports and enjoy following Manchester United and the Houston Astros.</p>
             </div>
             
             <!-- Education Section -->
@@ -112,7 +117,7 @@
                         <div class="w-1/2">
                             <h4 class="text-sm font-semibold">EnPro Industries</h4>
                             <p class="italic text-xs text-gray-300">Product Owner Intern</p>
-                            <p class="text-xs text-gray-400">Supervisor: <a href="https://www.linkedin.com/in/hndinh" class="text-blue-400">Hao Dinh</a></p>
+                            <p class="text-xs text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Hao Dinh</a></p>
                             <p class="text-sm text-gray-200">Projects:</p>
                             <ul class="list-disc pl-4 text-gray-200 text-xs">
                                 <li>Supply Chain Optimization</li>
@@ -135,7 +140,7 @@
                         <div class="w-1/2">
                             <h4 class="text-sm font-semibold">Garlock</h4>
                             <p class="italic text-xs text-gray-300">Industrial Engineering and Analytics Intern</p>
-                            <p class="text-xs text-gray-400">Supervisor: <a href="https://www.linkedin.com/in/aldoovalle" class="text-blue-400">Aldo Ovalle</a></p>
+                            <p class="text-xs text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Aldo Ovalle</a></p>
                             <p class="text-sm text-gray-200">Projects:</p>
                             <ul class="list-disc pl-4 text-gray-200 text-xs">
                                 <li>Continuous Improvement, Capacity Analysis and Automation</li>
@@ -239,7 +244,7 @@
             <div class="w-full grid grid-cols-3 gap-4 mt-4">
                 <div class="bg-gray-800 p-4 text-center rounded-xl text-white font-semibold cursor-pointer" onclick="showRecommendations()">Recommendations</div>
 		<div class="bg-gray-800 p-4 text-center rounded-xl text-white font-semibold cursor-pointer" onclick="showPublication()">Publication</div>
-                <div class="bg-gray-800 p-4 text-center rounded-xl text-white font-semibold">Certifications</div>
+                <div class="bg-gray-800 p-4 text-center rounded-xl text-white font-semibold cursor-pointer" onclick="showResume()">Resume</div>
             </div>
         </div>
     </div>
@@ -262,6 +267,15 @@
                 <img src="paper.png" alt="Publication" class="w-2/3 mx-auto rounded-lg cursor-pointer">
             </a>
             <button class="bg-red-500 px-4 py-2 rounded text-white mt-4" onclick="closePublication()">Close</button>
+        </div>
+    </div>
+ <!-- Resume Modal -->
+    <div id="resumeModal" class="hidden fixed inset-0 bg-black bg-opacity-75 justify-center items-center">
+        <div class="bg-gray-900 p-6 rounded-lg w-3/4 text-center">
+            <h3 class="text-lg font-semibold text-white mb-4">Resume</h3>
+            <iframe src="Venkatesh_Resume.pdf" class="w-full h-96" frameborder="0"></iframe>
+            <a href="/mnt/data/Venkatesh_Resume.pdf" download class="block mt-4 bg-blue-500 text-white px-4 py-2 rounded">Download Resume</a>
+            <button class="bg-red-500 px-4 py-2 rounded text-white mt-4" onclick="closeResume()">Close</button>
         </div>
     </div>
 </body>
