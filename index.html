@@ -274,7 +274,6 @@
         <div class="bg-gray-900 p-6 rounded-lg w-3/4 text-center">
             <h3 class="text-lg font-semibold text-white mb-4">Resume</h3>
             <iframe src="Venkatesh_Resume.pdf" class="w-full h-96" frameborder="0"></iframe>
-            <a href="/mnt/data/Venkatesh_Resume.pdf" download class="block mt-4 bg-blue-500 text-white px-4 py-2 rounded">Download Resume</a>
             <button class="bg-red-500 px-4 py-2 rounded text-white mt-4" onclick="closeResume()">Close</button>
         </div>
     </div>
