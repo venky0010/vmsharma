@@ -115,22 +115,22 @@
                             <img src="enpro.png" alt="EnPro" class="w-20 h-auto object-contain">
                         </div>
                         <div class="w-1/2">
-                            <h4 class="text-sm font-semibold">EnPro Industries</h4>
-                            <p class="italic text-xs text-gray-300">Product Owner Intern</p>
-                            <p class="text-xs text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Hao Dinh</a></p>
-                            <p class="text-sm text-gray-200">Projects:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-xs">
+                            <h4 class="text-base font-semibold">EnPro Industries</h4>
+                            <p class="italic text-sm text-gray-300">Product Owner Intern</p>
+                            <p class="text-sm text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Hao Dinh</a></p>
+                            <p class="text-base text-gray-200">Projects:</p>
+                            <ul class="list-disc pl-4 text-gray-200 text-sm">
                                 <li>Supply Chain Optimization</li>
                             </ul>
-                            <p class="text-sm text-gray-200">Improvements/Savings:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-xs">
+                            <p class="text-base text-gray-200">Impacts/Savings:</p>
+                            <ul class="list-disc pl-4 text-gray-200 text-sm">
                                 <li>Saved $270K per year</li>
                                 <li>Eliminated 240+ manual hours annually</li>
                             </ul>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-gray-200">Skills/Tools:</p>
-                            <p class="text-xs text-gray-200">Automation Anywhere, Azure AI, Power Automate, Python, Power BI, SQL, Oracle, Netsuite, API Web Services, Postman, AWS Datahub, Redshift, JIRA, Smartsheet</p>
+                            <p class="text-base text-gray-200">Skills/Tools:</p>
+                            <p class="text-sm text-gray-200">Automation Anywhere, Azure AI, Power Automate, Python, Power BI, SQL, Oracle, Netsuite, API Web Services, Postman, AWS Datahub, Redshift, JIRA, Smartsheet</p>
                         </div>
                     </div>
                     <div class="flex items-center">
@@ -138,22 +138,22 @@
                             <img src="garlock.png" alt="Garlock" class="w-20 h-auto mr-3 object-contain">
                         </div>
                         <div class="w-1/2">
-                            <h4 class="text-sm font-semibold">Garlock</h4>
-                            <p class="italic text-xs text-gray-300">Industrial Engineering and Analytics Intern</p>
-                            <p class="text-xs text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Aldo Ovalle</a></p>
-                            <p class="text-sm text-gray-200">Projects:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-xs">
+                            <h4 class="text-base font-semibold">Garlock</h4>
+                            <p class="italic text-sm text-gray-300">Industrial Engineering and Analytics Intern</p>
+                            <p class="text-sm text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Aldo Ovalle</a></p>
+                            <p class="text-base text-gray-200">Projects:</p>
+                            <ul class="list-disc pl-4 text-gray-200 text-sm">
                                 <li>Continuous Improvement, Capacity Analysis and Automation</li>
                             </ul>
-                            <p class="text-sm text-gray-200">Improvements/Savings:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-xs">
+                            <p class="text-base text-gray-200">Impacts/Savings:</p>
+                            <ul class="list-disc pl-4 text-gray-200 text-sm">
                                 <li>Increased Production by 17%</li>
                                 <li>Reduced variance by 12% acheiving production consistency</li>
                             </ul>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-gray-200">Skills/Tools:</p>
-                            <p class="text-xs text-gray-200">Lean Principles, Six Sigma, Python, PowerBI, Power Automate, Excel, t-test, beta distribution</p>
+                            <p class="text-base text-gray-200">Skills/Tools:</p>
+                            <p class="text-sm text-gray-200">Lean Principles, Six Sigma, Python, PowerBI, Power Automate, Excel, t-test, beta distribution</p>
                         </div>
                     </div>
 		   <div class="flex items-center">
@@ -161,59 +161,59 @@
                         <img src="asml.png" alt="ASML" class="w-20 h-auto mr-3 object-contain">
 			</div>
                         <div class="w-1/2">
-                            <h4 class="text-sm font-semibold">ASML</h4>
-                            <p class="italic text-xs text-gray-300">Data Analytics Intern</p>
-                            <p class="text-xs text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Dylan Holton</a></p>
-                            <p class="text-sm text-gray-200">Projects:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-xs">
+                            <h4 class="text-base font-semibold">ASML</h4>
+                            <p class="italic text-sm text-gray-300">Data Analytics Intern</p>
+                            <p class="text-sm text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Dylan Holton</a></p>
+                            <p class="text-base text-gray-200">Projects:</p>
+                            <ul class="list-disc pl-4 text-gray-200 text-sm">
                                 <li>Analytics and Automation</li>
                             </ul>
-                            <p class="text-sm text-gray-200">Impacts/Savings:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-xs">
+                            <p class="text-base text-gray-200">Impacts/Savings:</p>
+                            <ul class="list-disc pl-4 text-gray-200 text-sm">
                                 <li>Improved Preventive Maintenance process by 3 fold</li>
                                 <li>Increase on-time PM task completion rate by 80%</li>
                             </ul>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-gray-200">Skills/Tools:</p>
-                            <p class="text-xs text-gray-200">Python, Power Automate, Spotfire, Chi-square test, t-test, correlation analysis</p>
+                            <p class="text-base text-gray-200">Skills/Tools:</p>
+                            <p class="text-sm text-gray-200">Python, Power Automate, Spotfire, Chi-square test, t-test, correlation analysis</p>
                         </div>
                     </div>
                     <div class="flex items-center">
                         <img src="rbc.png" alt="Bosch" class="w-20 h-auto mr-3 object-contain">
                         <div class="w-1/2">
-                            <h4 class="text-sm font-semibold">Robert Bosch Centre for Data Science and AI</h4>
-                            <p class="italic text-xs text-gray-300">Project Associate</p>
-                            <p class="text-xs text-gray-400">Supervisor: <a href="https://doms.iitm.ac.in/index.php/nandan-s" class="text-blue-400">Nandan Sudarsanam</a></p>
-                            <p class="text-sm text-gray-200">Projects:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-xs">
+                            <h4 class="text-base font-semibold">Robert Bosch Centre for Data Science and AI</h4>
+                            <p class="italic text-sm text-gray-300">Project Associate</p>
+                            <p class="text-sm text-gray-400">Supervisor: <a href="https://doms.iitm.ac.in/index.php/nandan-s" class="text-blue-400">Nandan Sudarsanam</a></p>
+                            <p class="text-base text-gray-200">Projects:</p>
+                            <ul class="list-disc pl-4 text-gray-200 text-sm">
                                 <li>Data Science and Machine Learning</li>
                             </ul>
-                            <p class="text-sm text-gray-200">Impacts/Savings:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-xs">
+                            <p class="text-base text-gray-200">Impacts/Savings:</p>
+                            <ul class="list-disc pl-4 text-gray-200 text-sm">
                                 <li>Replaced month long data reconciliation process by Knowledge Graph</li>
                                 <li>Improved click thorugh rate by 15%</li>
                             </ul>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-gray-200">Skills/Tools:</p>
-                            <p class="text-xs text-gray-200">Python, Keras, PyTorch, Numpy, Pandas, Contextual Bandit Algorithm, CART, Clustering, ARIMA, Deep-AR, Chi-square Test for Independence, Normal Distribution, beta distribution</p>
+                            <p class="text-base text-gray-200">Skills/Tools:</p>
+                            <p class="text-sm text-gray-200">Python, Keras, PyTorch, Numpy, Pandas, Contextual Bandit Algorithm, CART, Clustering, ARIMA, Deep-AR, Chi-square Test for Independence, Normal Distribution, beta distribution</p>
                         </div>
                     </div>
 		    <div class="flex items-center">
                         <img src="bauer.jpeg" alt="Bauer College" class="w-20 h-auto mr-3 object-contain">
                         <div class="w-1/2">
-                            <h4 class="text-sm font-semibold">Bauer College of Business, UH</h4>
-                            <p class="italic text-xs text-gray-300">Instructional Assistant</p>
-                            <p class="text-xs text-gray-400">Supervisor: <a href="https://www.bauer.uh.edu/search/directory/profile.asp?firstname=Ravi&lastname=Aron" class="text-blue-400">Ravi Aron</a></p>
-                            <p class="text-sm text-gray-200">Projects:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-xs">
+                            <h4 class="text-base font-semibold">Bauer College of Business, UH</h4>
+                            <p class="italic text-sm text-gray-300">Instructional Assistant</p>
+                            <p class="text-sm text-gray-400">Supervisor: <a href="https://www.bauer.uh.edu/search/directory/profile.asp?firstname=Ravi&lastname=Aron" class="text-blue-400">Ravi Aron</a></p>
+                            <p class="text-base text-gray-200">Projects:</p>
+                            <ul class="list-disc pl-4 text-gray-200 text-sm">
                                 <li>Experimental Design and Market Research</li>
                             </ul>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-gray-200">Skills/Tools:</p>
-                            <p class="text-xs text-gray-200">Python, STATA, Excel, Factor Analysis, Regression, parametric and non parametric tests, VIF</p>
+                            <p class="text-base text-gray-200">Skills/Tools:</p>
+                            <p class="text-sm text-gray-200">Python, STATA, Excel, Factor Analysis, Regression, parametric and non parametric tests, VIF</p>
                         </div>
                     </div>
                     <div class="flex items-center">
@@ -221,17 +221,17 @@
                         <img src="doms.png" alt="Doms" class="w-20 h-auto mr-3 object-contain">
 			</div>
                         <div class="w-1/2">
-                            <h4 class="text-sm font-semibold">Indian Institute of Technology, Madras</h4>
-                            <p class="italic text-xs text-gray-300">Data Science Intern</p>
-                            <p class="text-xs text-gray-400">Supervisor: <a href="https://doms.iitm.ac.in/index.php/rrm" class="text-blue-400">Rahul Marathe</a></p>
-                            <p class="text-sm text-gray-200">Projects:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-xs">
+                            <h4 class="text-base font-semibold">Indian Institute of Technology, Madras</h4>
+                            <p class="italic text-sm text-gray-300">Data Science Intern</p>
+                            <p class="text-sm text-gray-400">Supervisor: <a href="https://doms.iitm.ac.in/index.php/rrm" class="text-blue-400">Rahul Marathe</a></p>
+                            <p class="text-base text-gray-200">Projects:</p>
+                            <ul class="list-disc pl-4 text-gray-200 text-sm">
                                 <li>Multi-variate Regression, Clustering and ANNOVA</li>
                             </ul>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-sm text-gray-200">Skills/Tools:</p>
-                            <p class="text-xs text-gray-200">Python, SPSS-AMOS, Clutering, Regression, Unsupervised Learning, ANNOVA, Nearest Neighbors</p>
+                            <p class="text-base text-gray-200">Skills/Tools:</p>
+                            <p class="text-sm text-gray-200">Python, SPSS-AMOS, Clutering, Regression, Unsupervised Learning, ANNOVA, Nearest Neighbors</p>
                         </div>
                     </div>
                 </div>
