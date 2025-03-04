@@ -80,7 +80,7 @@
             <!-- About Section -->
             <div class="mt-6 text-gray-300 text-xs w-full text-left">
                 <h3 class="text-sm font-semibold text-white">About Me</h3>
-                <p class="text-base text-left">Results-oriented Product Owner with expertise in AI, Automation, and BPM solutions. Skilled in product management, stakeholder management, machine learning, and data analytics. Proven ability to deliver scalable, user-centric solutions by aligning technical  capabilities with business needs. Experienced in process documentation, agile methodologies, and iterative product development. Adept at leveraging experimentation, machine learning, and data modeling to optimize workflows and drive data-driven decision making across organizations. Outside of work, I am passionate about sports and enjoy following Manchester United and the Houston Astros.</p>
+                <p class="text-base text-left">Results-oriented Product Owner with experience in continuous improvement, analytics, automation, and product management. Skilled in stakeholder management, machine learning, and data analytics, with a proven ability to deliver scalable, user-centric solutions by aligning technical capabilities with business needs. Experienced in process documentation, agile methodologies, and iterative product development. Adept at leveraging experimentation, data modeling, and automation to optimize workflows and drive data-driven decision-making across organizations. Outside of work, I am passionate about sports and enjoy following Manchester United and the Houston Astros.</p>
             </div>
             
             <!-- Education Section -->
