@@ -3,279 +3,907 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venkatesh Mohan Sharma | Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Venkatesh Mohan Sharma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #080b10;
+            --surface: #0d1117;
+            --card: #111722;
+            --border: rgba(255,255,255,0.06);
+            --accent: #e8c96d;
+            --accent2: #4fc3f7;
+            --text: #e8eaf0;
+            --muted: #6b7585;
+            --glow: rgba(232,201,109,0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: "Trebuchet MS", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Mono', monospace;
+            font-size: 13px;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        h2 {
-            font-family: "Arial Black", sans-serif;
+
+        /* Noise overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
         }
-        .modal {
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+
+        .layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
         }
-        .separator-line {
+
+        /* ── SIDEBAR ── */
+        .sidebar {
+            background: linear-gradient(180deg, #0d1117 0%, #080b10 100%);
+            border-right: 1px solid var(--border);
+            padding: 48px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .profile-ring {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            padding: 3px;
+            background: conic-gradient(var(--accent), var(--accent2), var(--accent));
+            animation: spin 8s linear infinite;
+            margin: 0 auto;
+        }
+
+        .profile-ring-inner {
             width: 100%;
-            height: 1px;
-            background: linear-gradient(to right, transparent, white, transparent);
-            margin: 10px 0;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            background: var(--bg);
+            border: 3px solid var(--bg);
         }
-        .justified-text {
+
+        .profile-ring-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .name-block { text-align: center; }
+
+        .name-block h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+        }
+
+        .name-block .title {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--accent);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 8px;
+        }
+
+        .location img { width: 18px; height: 12px; border-radius: 2px; }
+
+        .socials {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 11px;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .social-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--glow);
+        }
+
+        .social-btn img { width: 14px; height: 14px; }
+
+        .email-tag {
+            text-align: center;
+            color: var(--muted);
+            font-size: 10px;
+            word-break: break-all;
+        }
+
+        /* Sidebar sections */
+        .sidebar-section h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-section h3::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--accent), transparent);
+            opacity: 0.3;
+        }
+
+        .about-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            line-height: 1.75;
+            color: #a0aab8;
             text-align: justify;
         }
-        .company-logo {
-            background: radial-gradient(circle, white 40%, transparent 100%);
-            padding: 10px;
+
+        .edu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .edu-item:last-child { border-bottom: none; }
+
+        .edu-item img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
             border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+            padding: 4px;
+        }
+
+        .edu-text p:first-child { font-size: 12px; font-weight: 500; color: var(--text); }
+        .edu-text p:last-child { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+        /* ── MAIN ── */
+        .main {
+            padding: 48px 48px 80px;
+            overflow-y: auto;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .section-header h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .section-header .line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--border), transparent);
+        }
+
+        .exp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .exp-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .exp-card:nth-child(1) { animation-delay: 0.05s; }
+        .exp-card:nth-child(2) { animation-delay: 0.1s; }
+        .exp-card:nth-child(3) { animation-delay: 0.15s; }
+        .exp-card:nth-child(4) { animation-delay: 0.2s; }
+        .exp-card:nth-child(5) { animation-delay: 0.25s; }
+        .exp-card:nth-child(6) { animation-delay: 0.3s; }
+        .exp-card:nth-child(7) { animation-delay: 0.35s; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .exp-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--accent), var(--accent2));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .exp-card:hover {
+            border-color: rgba(232,201,109,0.2);
+            transform: translateY(-3px);
+        }
+
+        .exp-card:hover::before { opacity: 1; }
+
+        .exp-card.featured {
+            grid-column: span 2;
+            border-color: rgba(232,201,109,0.2);
+        }
+
+        .exp-card.featured::before { opacity: 1; }
+
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .logo-wrap {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+        }
+
+        .logo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .card-header h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .card-header .role {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--accent);
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        .card-header .supervisor {
+            color: var(--muted);
+            font-size: 10px;
+            margin-top: 4px;
+        }
+
+        .card-header .supervisor a {
+            color: var(--accent2);
+            text-decoration: none;
+        }
+
+        .card-header .supervisor a:hover { text-decoration: underline; }
+
+        .card-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 14px 0;
+        }
+
+        .card-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .card-col-label {
+            font-size: 9px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .card-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .card-col ul li {
+            font-size: 11px;
+            color: #9ba5b3;
+            padding-left: 12px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .card-col ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 9px;
+            top: 1px;
+        }
+
+        .impact-item {
+            color: #b8c8a0 !important;
+        }
+
+        .skills-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .skill-tag {
+            padding: 3px 10px;
+            background: rgba(79,195,247,0.07);
+            border: 1px solid rgba(79,195,247,0.15);
+            border-radius: 20px;
+            font-size: 10px;
+            color: var(--accent2);
+            white-space: nowrap;
+        }
+
+        /* Bottom actions */
+        .bottom-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .action-btn {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: 'Syne', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.04em;
+        }
+
+        .action-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--glow);
+            transform: translateY(-2px);
+        }
+
+        .action-btn .btn-icon {
+            font-size: 22px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        /* ── MODAL ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            width: 80%;
+            max-width: 900px;
+            max-height: 85vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-box h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .modal-grid img {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .modal-close {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: rgba(232,201,109,0.1);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            color: var(--accent);
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .modal-close:hover { background: var(--accent); color: var(--bg); }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .layout { grid-template-columns: 1fr; }
+            .sidebar { position: relative; height: auto; }
+            .exp-grid { grid-template-columns: 1fr; }
+            .exp-card.featured { grid-column: span 1; }
+            .main { padding: 28px 20px; }
+            .bottom-actions { grid-template-columns: 1fr; }
         }
     </style>
-    <script>
-        function showRecommendations() {
-            document.getElementById('recommendationModal').classList.remove('hidden');
-            document.getElementById('recommendationModal').classList.add('flex');
-        }
-        function closeRecommendations() {
-            document.getElementById('recommendationModal').classList.add('hidden');
-            document.getElementById('recommendationModal').classList.remove('flex');
-        }
-        function showPublication() {
-            document.getElementById('publicationModal').classList.remove('hidden');
-            document.getElementById('publicationModal').classList.add('flex');
-        }
-        function closePublication() {
-            document.getElementById('publicationModal').classList.add('hidden');
-            document.getElementById('publicationModal').classList.remove('flex');
-        }
-        function showResume() {
-            document.getElementById('resumeModal').classList.remove('hidden');
-            document.getElementById('resumeModal').classList.add('flex');
-        }
-        function closeResume() {
-            document.getElementById('resumeModal').classList.add('hidden');
-            document.getElementById('resumeModal').classList.remove('flex');
-        }
-    </script>
 </head>
-<body class="bg-gray-900 text-white">
-    <div class="flex flex-col md:flex-row h-auto md:h-screen">
-        <!-- Left Sidebar -->
-        <div class="w-full md:w-1/5 bg-gradient-to-b from-gray-700 to-black p-4 flex flex-col items-center text-center">
-            <img src="myimage.jpeg" alt="Venkatesh Mohan Sharma" class="w-28 h-28 rounded-full border-4 border-gray-500">
-            <h2 class="mt-3 text-base font-semibold">Venkatesh Mohan Sharma</h2>
-            <p class="mt-1 text-gray-300 text-xs flex items-center">Redmond, Washington <img src="flag.png" alt="US Flag" class="w-5 h-3 ml-2"></p>
-            <div class="mt-3 flex flex-row justify-center space-x-3 items-center text-xs">
-                <a href="https://www.linkedin.com/in/venkateshmsharma/" class="flex items-center space-x-1 text-blue-400 hover:text-blue-600">
-                    <img src="linkedin.png" alt="LinkedIn" class="w-4 h-4">
-                    <span>LinkedIn</span>
-                </a>
-                <a href="https://github.com/venky0010?tab=repositories" class="flex items-center space-x-1 text-gray-400 hover:text-gray-600">
-                    <img src="github.png" alt="GitHub" class="w-4 h-4">
-                    <span>GitHub</span>
-                </a>
-            </div>
-                
-                <p class="text-gray-400">Email: venkatesh23997@gmail.com</p>
-            
-            <!-- About Section -->
-            <div class="mt-6 text-gray-300 text-xs w-full text-left">
-                <h3 class="text-sm font-semibold text-white">About Me</h3>
-                <p class="text-base text-left">Results-oriented Product Owner with experience in continuous improvement, analytics, automation, and product management. Skilled in stakeholder management, machine learning, and data analytics, with a proven ability to deliver scalable, user-centric solutions by aligning technical capabilities with business needs. Experienced in process documentation, agile methodologies, and iterative product development. Adept at leveraging experimentation, data modeling, and automation to optimize workflows and drive data-driven decision-making across organizations. Outside of work, I am passionate about sports and enjoy following Manchester United and the Houston Astros.</p>
-            </div>
-            
-            <!-- Education Section -->
-            <div class="mt-6 text-gray-300 text-xs w-full text-left">
-                <h3 class="text-sm font-semibold text-white">Education</h3>
-                <div class="flex items-center mt-3">
-                    <img src="uh.png" alt="University of Houston" class="w-12 h-12 mr-2">
-                    <div>
-                        <p>University of Houston</p>
-                        <p class="text-xs">Masters in Industrial Engineering</p>
-                    </div>
-                </div>
-                <div class="flex items-center mt-3">
-                    <img src="vtu.png" alt="VTU" class="w-12 h-12 mr-2">
-                    <div>
-                        <p>Visvesvaraya Technological University</p>
-                        <p class="text-xs">Bachelors in Mechanical Engineering</p>
-                    </div>
+<body>
+
+<div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div>
+            <div class="profile-ring">
+                <div class="profile-ring-inner">
+                    <img src="myimage.jpeg" alt="Venkatesh Mohan Sharma">
                 </div>
             </div>
         </div>
-        
-        <!-- Right Side -->
 
-        <div class="w-full md:w-4/5 flex flex-col p-6 bg-gradient-to-b from-gray-900 to-gray-700">
-            <!-- Experiences Section -->
-            <div class="w-full p-6 rounded-xl flex flex-col" style="min-height: 85vh;">
-                <h3 class="text-lg font-semibold text-white mb-4">Experiences</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-grow">
-                    <div class="flex items-center">
-                        <div class="company-logo flex items-center">
-                            <img src="enpro.png" alt="EnPro" class="w-20 h-auto object-contain">
-                        </div>
-                        <div class="w-1/2">
-                            <h4 class="text-base font-semibold">EnPro Industries</h4>
-                            <p class="italic text-sm text-gray-300">Product Owner Intern</p>
-                            <p class="text-sm text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Hao Dinh</a></p>
-                            <p class="text-base text-gray-200">Projects:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-sm">
-                                <li>Supply Chain Optimization</li>
-                            </ul>
-                            <p class="text-base text-gray-200">Impacts/Savings:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-sm">
-                                <li>Saved $270K per year</li>
-                                <li>Eliminated 240+ manual hours annually</li>
-                            </ul>
-                        </div>
-                        <div class="w-1/2">
-                            <p class="text-base text-gray-200">Skills/Tools:</p>
-                            <p class="text-sm text-gray-200">Automation Anywhere, Azure AI, Power Automate, Python, Power BI, SQL, Oracle, Netsuite, API Web Services, Postman, AWS Datahub, Redshift, JIRA, Smartsheet</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="company-logo flex items-center">
-                            <img src="garlock.png" alt="Garlock" class="w-20 h-auto mr-3 object-contain">
-                        </div>
-                        <div class="w-1/2">
-                            <h4 class="text-base font-semibold">Garlock</h4>
-                            <p class="italic text-sm text-gray-300">Industrial Engineering and Analytics Intern</p>
-                            <p class="text-sm text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Aldo Ovalle</a></p>
-                            <p class="text-base text-gray-200">Projects:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-sm">
-                                <li>Continuous Improvement, Capacity Analysis and Automation</li>
-                            </ul>
-                            <p class="text-base text-gray-200">Impacts/Savings:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-sm">
-                                <li>Increased Production by 17%</li>
-                                <li>Reduced variance by 12% acheiving production consistency</li>
-                            </ul>
-                        </div>
-                        <div class="w-1/2">
-                            <p class="text-base text-gray-200">Skills/Tools:</p>
-                            <p class="text-sm text-gray-200">Lean Principles, Six Sigma, Python, PowerBI, Power Automate, Excel, t-test, beta distribution</p>
-                        </div>
-                    </div>
-		   <div class="flex items-center">
-			<div class="company-logo flex items-center">
-                        <img src="asml.png" alt="ASML" class="w-20 h-auto mr-3 object-contain">
-			</div>
-                        <div class="w-1/2">
-                            <h4 class="text-base font-semibold">ASML</h4>
-                            <p class="italic text-sm text-gray-300">Data Analytics Intern</p>
-                            <p class="text-sm text-gray-400">Supervisor: <a href="abc" class="text-blue-400">Dylan Holton</a></p>
-                            <p class="text-base text-gray-200">Projects:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-sm">
-                                <li>Analytics and Automation</li>
-                            </ul>
-                            <p class="text-base text-gray-200">Impacts/Savings:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-sm">
-                                <li>Improved Preventive Maintenance process by 3 fold</li>
-                                <li>Increase on-time PM task completion rate by 80%</li>
-                            </ul>
-                        </div>
-                        <div class="w-1/2">
-                            <p class="text-base text-gray-200">Skills/Tools:</p>
-                            <p class="text-sm text-gray-200">Python, Power Automate, Spotfire, Chi-square test, t-test, correlation analysis</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <img src="rbc.png" alt="Bosch" class="w-20 h-auto mr-3 object-contain">
-                        <div class="w-1/2">
-                            <h4 class="text-base font-semibold">Robert Bosch Centre for Data Science and AI</h4>
-                            <p class="italic text-sm text-gray-300">Project Associate</p>
-                            <p class="text-sm text-gray-400">Supervisor: <a href="https://doms.iitm.ac.in/index.php/nandan-s" class="text-blue-400">Nandan Sudarsanam</a></p>
-                            <p class="text-base text-gray-200">Projects:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-sm">
-                                <li>Data Science and Machine Learning</li>
-                            </ul>
-                            <p class="text-base text-gray-200">Impacts/Savings:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-sm">
-                                <li>Replaced month long data reconciliation process by Knowledge Graph</li>
-                                <li>Improved click thorugh rate by 15%</li>
-                            </ul>
-                        </div>
-                        <div class="w-1/2">
-                            <p class="text-base text-gray-200">Skills/Tools:</p>
-                            <p class="text-sm text-gray-200">Python, Keras, PyTorch, Numpy, Pandas, Contextual Bandit Algorithm, CART, Clustering, ARIMA, Deep-AR, Chi-square Test for Independence, Normal Distribution, beta distribution</p>
-                        </div>
-                    </div>
-		    <div class="flex items-center">
-                        <img src="bauer.jpeg" alt="Bauer College" class="w-20 h-auto mr-3 object-contain">
-                        <div class="w-1/2">
-                            <h4 class="text-base font-semibold">Bauer College of Business, UH</h4>
-                            <p class="italic text-sm text-gray-300">Instructional Assistant</p>
-                            <p class="text-sm text-gray-400">Supervisor: <a href="https://www.bauer.uh.edu/search/directory/profile.asp?firstname=Ravi&lastname=Aron" class="text-blue-400">Ravi Aron</a></p>
-                            <p class="text-base text-gray-200">Projects:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-sm">
-                                <li>Experimental Design and Market Research</li>
-                            </ul>
-                        </div>
-                        <div class="w-1/2">
-                            <p class="text-base text-gray-200">Skills/Tools:</p>
-                            <p class="text-sm text-gray-200">Python, STATA, Excel, Factor Analysis, Regression, parametric and non parametric tests, VIF</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-			<div class="company-logo flex items-center">
-                        <img src="doms.png" alt="Doms" class="w-20 h-auto mr-3 object-contain">
-			</div>
-                        <div class="w-1/2">
-                            <h4 class="text-base font-semibold">Indian Institute of Technology, Madras</h4>
-                            <p class="italic text-sm text-gray-300">Data Science Intern</p>
-                            <p class="text-sm text-gray-400">Supervisor: <a href="https://doms.iitm.ac.in/index.php/rrm" class="text-blue-400">Rahul Marathe</a></p>
-                            <p class="text-base text-gray-200">Projects:</p>
-                            <ul class="list-disc pl-4 text-gray-200 text-sm">
-                                <li>Multi-variate Regression, Clustering and ANNOVA</li>
-                            </ul>
-                        </div>
-                        <div class="w-1/2">
-                            <p class="text-base text-gray-200">Skills/Tools:</p>
-                            <p class="text-sm text-gray-200">Python, SPSS-AMOS, Clutering, Regression, Unsupervised Learning, ANNOVA, Nearest Neighbors</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Separator Line -->
-            <div class="separator-line"></div>
-
-            <!-- Bottom Section -->
-            <div class="w-full grid grid-cols-3 gap-4 mt-4">
-                <div class="bg-gray-800 p-4 text-center rounded-xl text-white font-semibold cursor-pointer" onclick="showRecommendations()">Recommendations</div>
-		<div class="bg-gray-800 p-4 text-center rounded-xl text-white font-semibold cursor-pointer" onclick="showPublication()">Publication</div>
-                <div class="bg-gray-800 p-4 text-center rounded-xl text-white font-semibold cursor-pointer" onclick="showResume()">Resume</div>
+        <div class="name-block">
+            <h1>Venkatesh<br>Mohan Sharma</h1>
+            <p class="title">Data Scientist & Product Owner</p>
+            <div class="location">
+                Redmond, Washington
+                <img src="flag.png" alt="US Flag">
             </div>
         </div>
-    </div>
 
-    <!-- Recommendations Modal -->
-    <div id="recommendationModal" class="hidden fixed inset-0 bg-black bg-opacity-75 justify-center items-center">
-        <div class="bg-gray-900 p-6 rounded-lg w-3/4 grid grid-cols-2 gap-4">
-            <img src="reco3.png" alt="Recommendation 3" class="rounded-lg">
-            <img src="reco2.png" alt="Recommendation 2" class="rounded-lg">
-            <img src="reco1.png" alt="Recommendation 1" class="rounded-lg">
-            <img src="reco4.png" alt="Recommendation 4" class="rounded-lg">
-            <button class="bg-red-500 px-4 py-2 rounded text-white col-span-2" onclick="closeRecommendations()">Close</button>
-        </div>
-    </div>
-    <!-- Publication Modal -->
-    <div id="publicationModal" class="hidden fixed inset-0 bg-black bg-opacity-75 justify-center items-center">
-        <div class="bg-gray-900 p-6 rounded-lg w-2/3 text-center">
-            <h3 class="text-lg font-semibold text-white mb-4">Publication</h3>
-            <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0268190" target="_blank">
-                <img src="paper.png" alt="Publication" class="w-2/3 mx-auto rounded-lg cursor-pointer">
+        <div class="socials">
+            <a href="https://www.linkedin.com/in/venkateshmsharma/" class="social-btn" target="_blank">
+                <img src="linkedin.png" alt="LinkedIn"> LinkedIn
             </a>
-            <button class="bg-red-500 px-4 py-2 rounded text-white mt-4" onclick="closePublication()">Close</button>
+            <a href="https://github.com/venky0010?tab=repositories" class="social-btn" target="_blank">
+                <img src="github.png" alt="GitHub"> GitHub
+            </a>
         </div>
-    </div>
- <!-- Resume Modal -->
-    <div id="resumeModal" class="hidden fixed inset-0 bg-black bg-opacity-75 justify-center items-center">
-        <div class="bg-gray-900 p-6 rounded-lg w-3/4 text-center">
-            <h3 class="text-lg font-semibold text-white mb-4">Resume</h3>
-            <iframe src="Venkatesh_Resume.pdf" class="w-full h-96" frameborder="0"></iframe>
-            <button class="bg-red-500 px-4 py-2 rounded text-white mt-4" onclick="closeResume()">Close</button>
+
+        <p class="email-tag">venkatesh23997@gmail.com</p>
+
+        <div class="sidebar-section">
+            <h3>About</h3>
+            <p class="about-text">
+                Results-oriented Product Owner with experience in continuous improvement, analytics, automation, and product management. Skilled in stakeholder management, machine learning, and data analytics — delivering scalable, user-centric solutions by aligning technical capabilities with business needs. Outside of work, I follow Manchester United and the Houston Astros.
+            </p>
         </div>
+
+        <div class="sidebar-section">
+            <h3>Education</h3>
+            <div class="edu-item">
+                <img src="uh.png" alt="University of Houston">
+                <div class="edu-text">
+                    <p>University of Houston</p>
+                    <p>M.S. Industrial Engineering</p>
+                </div>
+            </div>
+            <div class="edu-item">
+                <img src="vtu.png" alt="VTU">
+                <div class="edu-text">
+                    <p>Visvesvaraya Technological Univ.</p>
+                    <p>B.E. Mechanical Engineering</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+        <div class="section-header">
+            <h2>Experience</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="exp-grid">
+
+            <!-- Ryder Scott — FEATURED / LATEST -->
+            <div class="exp-card featured">
+                <div class="card-top">
+                    <div class="logo-wrap">
+                        <img src="rydersco.png" alt="Ryder Scott" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-family:Syne,sans-serif;font-weight:800;font-size:10px;color:var(--accent);text-align:center\'>RSC</span>'">
+                    </div>
+                    <div class="card-header">
+                        <h4>Ryder Scott Company</h4>
+                        <p class="role">Data Scientist</p>
+                        <p class="supervisor">Current Role · Houston, TX</p>
+                    </div>
+                    <div style="margin-left:auto; padding: 4px 12px; background: rgba(232,201,109,0.1); border: 1px solid var(--accent); border-radius:20px; font-size:10px; color:var(--accent); font-weight:600; white-space:nowrap; height: fit-content;">
+                        Latest
+                    </div>
+                </div>
+                <div class="card-divider"></div>
+                <div class="card-cols">
+                    <div class="card-col">
+                        <p class="card-col-label">Projects</p>
+                        <ul>
+                            <li>Reservoir data science & analytics</li>
+                            <li>Machine learning for reserves estimation</li>
+                        </ul>
+                    </div>
+                    <div class="card-col">
+                        <p class="card-col-label">Skills / Tools</p>
+                        <div class="skills-wrap">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Data Science</span>
+                            <span class="skill-tag">Petroleum Analytics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EnPro -->
+            <div class="exp-card">
+                <div class="card-top">
+                    <div class="logo-wrap">
+                        <img src="enpro.png" alt="EnPro">
+                    </div>
+                    <div class="card-header">
+                        <h4>EnPro Industries</h4>
+                        <p class="role">Product Owner Intern</p>
+                        <p class="supervisor">Supervisor: <a href="#">Hao Dinh</a></p>
+                    </div>
+                </div>
+                <div class="card-divider"></div>
+                <div class="card-cols">
+                    <div class="card-col">
+                        <p class="card-col-label">Impacts</p>
+                        <ul>
+                            <li class="impact-item">Saved $270K per year</li>
+                            <li class="impact-item">Eliminated 240+ manual hours annually</li>
+                        </ul>
+                    </div>
+                    <div class="card-col">
+                        <p class="card-col-label">Tools</p>
+                        <div class="skills-wrap">
+                            <span class="skill-tag">Automation Anywhere</span>
+                            <span class="skill-tag">Azure AI</span>
+                            <span class="skill-tag">Power Automate</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">AWS Redshift</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Garlock -->
+            <div class="exp-card">
+                <div class="card-top">
+                    <div class="logo-wrap">
+                        <img src="garlock.png" alt="Garlock">
+                    </div>
+                    <div class="card-header">
+                        <h4>Garlock</h4>
+                        <p class="role">Industrial Engineering & Analytics Intern</p>
+                        <p class="supervisor">Supervisor: <a href="#">Aldo Ovalle</a></p>
+                    </div>
+                </div>
+                <div class="card-divider"></div>
+                <div class="card-cols">
+                    <div class="card-col">
+                        <p class="card-col-label">Impacts</p>
+                        <ul>
+                            <li class="impact-item">Increased production by 17%</li>
+                            <li class="impact-item">Reduced variance by 12%</li>
+                        </ul>
+                    </div>
+                    <div class="card-col">
+                        <p class="card-col-label">Tools</p>
+                        <div class="skills-wrap">
+                            <span class="skill-tag">Lean / Six Sigma</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">t-test</span>
+                            <span class="skill-tag">Beta Distribution</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ASML -->
+            <div class="exp-card">
+                <div class="card-top">
+                    <div class="logo-wrap">
+                        <img src="asml.png" alt="ASML">
+                    </div>
+                    <div class="card-header">
+                        <h4>ASML</h4>
+                        <p class="role">Data Analytics Intern</p>
+                        <p class="supervisor">Supervisor: <a href="#">Dylan Holton</a></p>
+                    </div>
+                </div>
+                <div class="card-divider"></div>
+                <div class="card-cols">
+                    <div class="card-col">
+                        <p class="card-col-label">Impacts</p>
+                        <ul>
+                            <li class="impact-item">Improved PM process 3×</li>
+                            <li class="impact-item">+80% on-time PM completion rate</li>
+                        </ul>
+                    </div>
+                    <div class="card-col">
+                        <p class="card-col-label">Tools</p>
+                        <div class="skills-wrap">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Power Automate</span>
+                            <span class="skill-tag">Spotfire</span>
+                            <span class="skill-tag">Chi-square</span>
+                            <span class="skill-tag">Correlation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Robert Bosch Centre -->
+            <div class="exp-card">
+                <div class="card-top">
+                    <div class="logo-wrap">
+                        <img src="rbc.png" alt="Robert Bosch Centre">
+                    </div>
+                    <div class="card-header">
+                        <h4>Robert Bosch Centre for DS & AI</h4>
+                        <p class="role">Project Associate</p>
+                        <p class="supervisor">Supervisor: <a href="https://doms.iitm.ac.in/index.php/nandan-s" target="_blank">Nandan Sudarsanam</a></p>
+                    </div>
+                </div>
+                <div class="card-divider"></div>
+                <div class="card-cols">
+                    <div class="card-col">
+                        <p class="card-col-label">Impacts</p>
+                        <ul>
+                            <li class="impact-item">Replaced month-long reconciliation with Knowledge Graph</li>
+                            <li class="impact-item">+15% click-through rate</li>
+                        </ul>
+                    </div>
+                    <div class="card-col">
+                        <p class="card-col-label">Tools</p>
+                        <div class="skills-wrap">
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">Keras</span>
+                            <span class="skill-tag">Contextual Bandit</span>
+                            <span class="skill-tag">ARIMA</span>
+                            <span class="skill-tag">Deep-AR</span>
+                            <span class="skill-tag">CART</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bauer College -->
+            <div class="exp-card">
+                <div class="card-top">
+                    <div class="logo-wrap">
+                        <img src="bauer.jpeg" alt="Bauer College">
+                    </div>
+                    <div class="card-header">
+                        <h4>Bauer College of Business, UH</h4>
+                        <p class="role">Instructional Assistant</p>
+                        <p class="supervisor">Supervisor: <a href="https://www.bauer.uh.edu/search/directory/profile.asp?firstname=Ravi&lastname=Aron" target="_blank">Ravi Aron</a></p>
+                    </div>
+                </div>
+                <div class="card-divider"></div>
+                <div class="card-cols">
+                    <div class="card-col">
+                        <p class="card-col-label">Projects</p>
+                        <ul>
+                            <li>Experimental Design & Market Research</li>
+                        </ul>
+                    </div>
+                    <div class="card-col">
+                        <p class="card-col-label">Tools</p>
+                        <div class="skills-wrap">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">STATA</span>
+                            <span class="skill-tag">Factor Analysis</span>
+                            <span class="skill-tag">Regression</span>
+                            <span class="skill-tag">VIF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IIT Madras -->
+            <div class="exp-card">
+                <div class="card-top">
+                    <div class="logo-wrap">
+                        <img src="doms.png" alt="IIT Madras">
+                    </div>
+                    <div class="card-header">
+                        <h4>IIT Madras</h4>
+                        <p class="role">Data Science Intern</p>
+                        <p class="supervisor">Supervisor: <a href="https://doms.iitm.ac.in/index.php/rrm" target="_blank">Rahul Marathe</a></p>
+                    </div>
+                </div>
+                <div class="card-divider"></div>
+                <div class="card-cols">
+                    <div class="card-col">
+                        <p class="card-col-label">Projects</p>
+                        <ul>
+                            <li>Multivariate Regression, Clustering & ANOVA</li>
+                        </ul>
+                    </div>
+                    <div class="card-col">
+                        <p class="card-col-label">Tools</p>
+                        <div class="skills-wrap">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">SPSS-AMOS</span>
+                            <span class="skill-tag">Clustering</span>
+                            <span class="skill-tag">ANOVA</span>
+                            <span class="skill-tag">KNN</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Actions -->
+        <div class="section-header">
+            <h2>More</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="bottom-actions">
+            <div class="action-btn" onclick="document.getElementById('recoModal').classList.add('open')">
+                <span class="btn-icon">✦</span>
+                Recommendations
+            </div>
+            <div class="action-btn" onclick="document.getElementById('pubModal').classList.add('open')">
+                <span class="btn-icon">◎</span>
+                Publication
+            </div>
+            <div class="action-btn" onclick="document.getElementById('cvModal').classList.add('open')">
+                <span class="btn-icon">⬡</span>
+                Resume
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Recommendations Modal -->
+<div id="recoModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal-box">
+        <h3>Recommendations</h3>
+        <div class="modal-grid">
+            <img src="reco3.png" alt="Recommendation 3">
+            <img src="reco2.png" alt="Recommendation 2">
+            <img src="reco1.png" alt="Recommendation 1">
+            <img src="reco4.png" alt="Recommendation 4">
+        </div>
+        <button class="modal-close" onclick="document.getElementById('recoModal').classList.remove('open')">Close</button>
     </div>
+</div>
+
+<!-- Publication Modal -->
+<div id="pubModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal-box" style="max-width:600px; text-align:center;">
+        <h3>Publication</h3>
+        <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0268190" target="_blank">
+            <img src="paper.png" alt="Publication" style="width:80%; border-radius:10px; border:1px solid var(--border); margin: 0 auto 16px; display:block;">
+        </a>
+        <button class="modal-close" onclick="document.getElementById('pubModal').classList.remove('open')">Close</button>
+    </div>
+</div>
+
+<!-- Resume Modal -->
+<div id="cvModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal-box">
+        <h3>Resume</h3>
+        <iframe src="Venkatesh_Resume.pdf" style="width:100%; height:500px; border:none; border-radius:8px; background:#fff;" frameborder="0"></iframe>
+        <button class="modal-close" onclick="document.getElementById('cvModal').classList.remove('open')">Close</button>
+    </div>
+</div>
+
 </body>
 </html>
