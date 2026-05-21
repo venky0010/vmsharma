@@ -1,1097 +1,691 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venkatesh Mohan Sharma</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #05070d;
-            --bg2: #080c14;
-            --surface: #0c1018;
-            --card: #0f1520;
-            --card-hover: #131b28;
-            --border: rgba(255,255,255,0.055);
-            --border-lit: rgba(100,180,255,0.18);
-            --gold: #c9a84c;
-            --gold2: #e8c96d;
-            --gold-dim: rgba(201,168,76,0.12);
-            --blue: #4a9eff;
-            --blue-dim: rgba(74,158,255,0.1);
-            --text: #dde3ee;
-            --text2: #8a95a8;
-            --text3: #505a6a;
-            --glow-gold: 0 0 40px rgba(201,168,76,0.08);
-            --glow-blue: 0 0 30px rgba(74,158,255,0.06);
-        }
-
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { zoom: 0.72; }
-        html, body { height: 100vh; overflow: hidden; }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 13px;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Atmospheric background */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 60% 40% at 15% 20%, rgba(74,158,255,0.04) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 30% at 85% 75%, rgba(201,168,76,0.04) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Fine grid overlay */
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.013) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.013) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .layout {
-            display: grid;
-            grid-template-columns: 240px 1fr;
-            height: 100vh;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ══════════════════════════════
-           SIDEBAR
-        ══════════════════════════════ */
-        .sidebar {
-            background: linear-gradient(180deg, rgba(12,16,24,0.98) 0%, rgba(8,12,20,0.98) 100%);
-            border-right: 1px solid var(--border);
-            padding: 16px 16px 16px 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        /* Profile photo — static, no spin */
-        .profile-wrap {
-            position: relative;
-            width: 64px;
-            height: 64px;
-            margin: 0 auto;
-        }
-
-        .profile-wrap::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--blue) 50%, var(--gold) 100%);
-            z-index: 0;
-        }
-
-        .profile-wrap::after {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            border: 1px solid rgba(201,168,76,0.15);
-            z-index: 0;
-        }
-
-        .profile-wrap img {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            object-fit: cover;
-            position: relative;
-            z-index: 1;
-            border: 2.5px solid var(--bg);
-            display: block;
-        }
-
-        /* Online dot */
-        .profile-dot {
-            position: absolute;
-            bottom: 3px;
-            right: 3px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #4caf80;
-            border: 2px solid var(--bg2);
-            z-index: 2;
-            animation: pulse-dot 2.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(76,175,128,0.4); }
-            50% { box-shadow: 0 0 0 5px rgba(76,175,128,0); }
-        }
-
-        .name-block { text-align: center; }
-
-        .name-block h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            line-height: 1.2;
-            color: #eef0f5;
-        }
-
-        .name-block .title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: var(--gold);
-            margin-top: 7px;
-            letter-spacing: 0.06em;
-            font-weight: 300;
-        }
-
-        .location-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            color: var(--text3);
-            font-size: 10.5px;
-            margin-top: 8px;
-            font-weight: 400;
-        }
-
-        .location-row svg { opacity: 0.5; flex-shrink: 0; }
-
-        /* Social links */
-        .socials {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-        }
-
-        .social-btn {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 10px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            text-decoration: none;
-            color: var(--text2);
-            font-size: 10.5px;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-            transition: all 0.2s;
-            background: rgba(255,255,255,0.02);
-        }
-
-        .social-btn:hover {
-            border-color: var(--blue);
-            color: var(--blue);
-            background: var(--blue-dim);
-        }
-
-        .social-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
-
-        .email-row {
-            text-align: center;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9.5px;
-            color: var(--text3);
-            letter-spacing: 0.02em;
-        }
-
-        /* Sidebar section */
-        .s-sec { display: flex; flex-direction: column; gap: 8px; }
-
-        .s-label {
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--text3);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .s-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-
-        .about-text {
-            font-size: 10.5px;
-            line-height: 1.6;
-            color: var(--text2);
-            font-weight: 300;
-            display: -webkit-box;
-            -webkit-line-clamp: 5;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* Education items */
-        .edu-list { display: flex; flex-direction: column; gap: 0px; }
-
-        .edu-item {
-            display: flex;
-            align-items: center;
-            gap: 11px;
-            padding: 5px 8px;
-            border-radius: 8px;
-            border: 1px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .edu-item:hover {
-            background: rgba(255,255,255,0.02);
-            border-color: var(--border);
-        }
-
-        /* Logo box — used everywhere */
-        .logo-box {
-            width: 38px;
-            height: 38px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            border: none;
-        }
-        .logo-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 1px 4px rgba(0,0,0,0.4));
-        }
-        .logo-box .fb {
-            display: none;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            font-weight: 600;
-            color: var(--text3);
-        }
-
-        .edu-text p:first-child {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text);
-            line-height: 1.3;
-        }
-
-        .edu-text p:last-child {
-            font-size: 10px;
-            color: var(--text3);
-            margin-top: 2px;
-            font-weight: 400;
-        }
-
-        /* ══════════════════════════════
-           MAIN CONTENT
-        ══════════════════════════════ */
-        .main {
-            padding: 14px 24px 10px;
-        }
-
-        /* Section title */
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 6px;
-        }
-
-        .section-title h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            font-weight: 900;
-            font-style: italic;
-            color: var(--text);
-            white-space: nowrap;
-        }
-
-        .section-title .divider {
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(to right, var(--border-lit), transparent);
-        }
-
-        /* Experience grid */
-        .exp-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 0;
-        }
-
-        /* Cards */
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 11px 14px 10px;
-            position: relative;
-            overflow: hidden;
-            transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s, background 0.25s;
-            animation: rise 0.5s ease both;
-        }
-
-        .card:nth-child(1) { animation-delay: 0.04s; }
-        .card:nth-child(2) { animation-delay: 0.09s; }
-        .card:nth-child(3) { animation-delay: 0.14s; }
-        .card:nth-child(4) { animation-delay: 0.19s; }
-        .card:nth-child(5) { animation-delay: 0.24s; }
-        .card:nth-child(6) { animation-delay: 0.29s; }
-        .card:nth-child(7) { animation-delay: 0.34s; }
-
-        @keyframes rise {
-            from { opacity: 0; transform: translateY(18px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card:hover {
-            background: var(--card-hover);
-            border-color: var(--border-lit);
-            transform: translateY(-2px);
-            box-shadow: var(--glow-blue);
-        }
-
-        /* Featured card accent */
-        .card.featured {
-            grid-column: span 2;
-            border-color: rgba(201,168,76,0.2);
-        }
-
-        .card.featured:hover {
-            border-color: rgba(201,168,76,0.35);
-            box-shadow: var(--glow-gold);
-        }
-
-        /* Subtle top-edge gradient on featured */
-        .card.featured::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            opacity: 0.6;
-        }
-
-        /* Corner accent decoration */
-        .card::after {
-            content: '';
-            position: absolute;
-            bottom: 0; right: 0;
-            width: 80px; height: 80px;
-            background: radial-gradient(circle at bottom right, rgba(74,158,255,0.04), transparent 70%);
-            pointer-events: none;
-        }
-
-        .card-head {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
-
-        /* Logo: transparent, no box — image shows as-is */
-        .card-logo {
-            width: 38px;
-            height: 38px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            border: none;
-            box-shadow: none;
-            border-radius: 0;
-        }
-        .card-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)) brightness(1.08);
-        }
-        /* Fallback text badge shown only when image fails */
-        .card-logo .fb {
-            display: none;
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
-            align-items: center;
-            justify-content: center;
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 600;
-            font-size: 10px;
-            letter-spacing: 0.05em;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--text2);
-        }
-
-        .card-meta { flex: 1; min-width: 0; }
-
-        .card-meta h4 {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--text);
-            line-height: 1.2;
-        }
-
-        .card-meta .role {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 10.5px;
-            color: var(--gold);
-            margin-top: 2px;
-            font-weight: 400;
-        }
-
-        .card-meta .sup {
-            font-size: 9px;
-            color: var(--text3);
-            margin-top: 2px;
-        }
-
-        .card-meta .sup a {
-            color: var(--blue);
-            text-decoration: none;
-            transition: opacity 0.15s;
-        }
-
-        .card-meta .sup a:hover { opacity: 0.75; }
-
-        /* Latest badge */
-        .badge-latest {
-            padding: 3px 10px;
-            background: rgba(201,168,76,0.1);
-            border: 1px solid rgba(201,168,76,0.3);
-            border-radius: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 9px;
-            font-weight: 500;
-            color: var(--gold2);
-            letter-spacing: 0.06em;
-            white-space: nowrap;
-            height: fit-content;
-            flex-shrink: 0;
-        }
-
-        /* Divider line */
-        .card-div {
-            height: 1px;
-            background: var(--border);
-            margin: 7px 0;
-        }
-
-        /* Two-column body */
-        .card-body {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .col-label {
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--text3);
-            margin-bottom: 5px;
-        }
-
-        .bullet-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .bullet-list li {
-            font-size: 10px;
-            color: #8da0b4;
-            padding-left: 14px;
-            position: relative;
-            line-height: 1.55;
-        }
-
-        .bullet-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 6px;
-            width: 5px;
-            height: 1px;
-            background: var(--gold);
-            opacity: 0.6;
-        }
-
-        .impact-li { color: #a2c98a !important; }
-
-        /* Skill tags */
-        .tags { display: flex; flex-wrap: wrap; gap: 3px; }
-
-        .tag {
-            padding: 2px 7px;
-            background: rgba(74,158,255,0.06);
-            border: 1px solid rgba(74,158,255,0.12);
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 8.5px;
-            color: #6aadee;
-            white-space: nowrap;
-            letter-spacing: 0.01em;
-            transition: all 0.15s;
-        }
-
-        .tag:hover {
-            background: rgba(74,158,255,0.12);
-            border-color: rgba(74,158,255,0.25);
-        }
-
-        /* ══════════════════════════════
-           BOTTOM ACTION BUTTONS
-        ══════════════════════════════ */
-        .actions-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .action-btn {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 10px 14px 10px;
-            cursor: pointer;
-            transition: all 0.22s;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .action-btn:hover {
-            background: var(--card-hover);
-            border-color: var(--border-lit);
-            transform: translateY(-2px);
-            box-shadow: var(--glow-blue);
-        }
-
-        .btn-icon-wrap {
-            width: 26px;
-            height: 26px;
-            border-radius: 6px;
-            background: var(--blue-dim);
-            border: 1px solid rgba(74,158,255,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-icon-wrap svg { width: 12px; height: 12px; color: var(--blue); }
-
-        .btn-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text);
-            letter-spacing: 0.01em;
-        }
-
-        .btn-desc {
-            font-size: 9px;
-            color: var(--text3);
-            font-weight: 400;
-        }
-
-        /* ══════════════════════════════
-           MODAL
-        ══════════════════════════════ */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.88);
-            backdrop-filter: blur(12px);
-            z-index: 200;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-overlay.open { display: flex; animation: mfade 0.2s ease; }
-
-        @keyframes mfade { from { opacity: 0; } to { opacity: 1; } }
-
-        .modal-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 30px;
-            width: 82%;
-            max-width: 880px;
-            max-height: 88vh;
-            overflow-y: auto;
-            animation: mslide 0.28s ease;
-        }
-
-        @keyframes mslide {
-            from { transform: translateY(24px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .modal-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            font-weight: 700;
-            font-style: italic;
-            color: var(--gold2);
-            margin-bottom: 22px;
-        }
-
-        .modal-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-
-        .modal-grid img {
-            width: 100%;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .modal-close {
-            width: 100%;
-            padding: 11px;
-            background: transparent;
-            border: 1px solid var(--border);
-            border-radius: 9px;
-            color: var(--text2);
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            letter-spacing: 0.04em;
-        }
-
-        .modal-close:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-            background: var(--gold-dim);
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 3px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .layout { grid-template-columns: 1fr; }
-            .sidebar { position: relative; height: auto; }
-            .exp-grid { grid-template-columns: 1fr; }
-            .card.featured { grid-column: span 1; }
-            .main { padding: 28px 18px 60px; }
-            .actions-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venkatesh Mohan Sharma</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080a0f;
+  --s1: #0d1019;
+  --s2: #111520;
+  --s3: #161c2a;
+  --border: rgba(255,255,255,0.06);
+  --borderhi: rgba(255,255,255,0.12);
+  --amber: #f0b429;
+  --amber2: #ffd166;
+  --amberdim: rgba(240,180,41,0.1);
+  --teal: #00d4aa;
+  --tealdim: rgba(0,212,170,0.08);
+  --blue: #4d9de0;
+  --bluedim: rgba(77,157,224,0.08);
+  --text: #e2e8f2;
+  --t2: #7c8fa8;
+  --t3: #3d4f66;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:13px;height:100%}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  height:100vh;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:300px 1fr;
+}
+
+/* ── SIDEBAR ── */
+.sb{
+  background:var(--s1);
+  border-right:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+  height:100vh;
+  overflow:hidden;
+  position:relative;
+}
+.sb-top{
+  padding:28px 24px 20px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.sb-scroll{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:20px 24px 24px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.sb-scroll::-webkit-scrollbar{width:0}
+
+/* avatar */
+.av-row{display:flex;align-items:center;gap:14px}
+.av{
+  width:58px;height:58px;border-radius:14px;flex-shrink:0;
+  background:var(--s3);overflow:hidden;position:relative;
+  border:1px solid var(--borderhi);
+}
+.av img{width:100%;height:100%;object-fit:cover}
+.av-info h1{
+  font-family:'Fraunces',serif;
+  font-size:17px;font-weight:600;line-height:1.2;color:#f0f4ff;
+}
+.av-info .role{
+  font-size:10.5px;color:var(--amber);font-weight:500;
+  margin-top:3px;letter-spacing:0.03em;
+}
+.av-info .loc{
+  display:flex;align-items:center;gap:4px;
+  font-size:10px;color:var(--t3);margin-top:4px;
+}
+
+/* links row */
+.links{display:flex;gap:6px;margin-top:14px}
+.lnk{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:5px;
+  padding:7px 8px;border-radius:8px;border:1px solid var(--border);
+  background:var(--s2);color:var(--t2);font-size:10.5px;font-weight:500;
+  text-decoration:none;transition:all .18s;
+}
+.lnk:hover{border-color:var(--teal);color:var(--teal);background:var(--tealdim)}
+.lnk svg{width:12px;height:12px;flex-shrink:0}
+.email{
+  font-family:'DM Mono',monospace;font-size:9.5px;
+  color:var(--t3);text-align:center;margin-top:8px;letter-spacing:.01em;
+}
+
+/* sidebar sections */
+.sec-label{
+  font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:10px;
+}
+.about-p{
+  font-size:11px;line-height:1.75;color:var(--t2);font-weight:300;
+}
+
+/* education */
+.edu-item{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 10px;border-radius:9px;
+  border:1px solid transparent;transition:all .18s;
+}
+.edu-item:hover{background:var(--s2);border-color:var(--border)}
+.edu-logo{
+  width:36px;height:36px;flex-shrink:0;
+  background:transparent;display:flex;align-items:center;justify-content:center;
+}
+.edu-logo img{width:100%;height:100%;object-fit:contain;filter:brightness(1.1)}
+.edu-text p:first-child{font-size:11.5px;font-weight:600;color:var(--text)}
+.edu-text p:last-child{font-size:9.5px;color:var(--t3);margin-top:1px}
+
+/* ── MAIN ── */
+.main{
+  display:flex;flex-direction:column;
+  height:100vh;overflow:hidden;
+  background:var(--bg);
+}
+.main-header{
+  padding:20px 28px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.main-header h2{
+  font-family:'Fraunces',serif;font-style:italic;
+  font-size:22px;font-weight:600;color:var(--text);
+}
+.tab-row{display:flex;gap:4px}
+.tab{
+  padding:5px 14px;border-radius:6px;border:1px solid transparent;
+  font-size:11px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .15s;
+}
+.tab.active,.tab:hover{background:var(--s2);border-color:var(--borderhi);color:var(--text)}
+
+/* experience scroll area */
+.exp-scroll{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  padding:16px 28px 20px;
+}
+.exp-scroll::-webkit-scrollbar{width:3px}
+.exp-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+/* timeline layout */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{
+  display:grid;grid-template-columns:120px 1fr;
+  gap:0;position:relative;
+}
+.tl-item::before{
+  content:'';position:absolute;
+  left:119px;top:24px;bottom:-1px;
+  width:1px;background:var(--border);
+}
+.tl-item:last-child::before{display:none}
+.tl-left{
+  padding:14px 16px 14px 0;
+  display:flex;flex-direction:column;align-items:flex-end;
+  gap:6px;flex-shrink:0;
+}
+.tl-logo{
+  width:44px;height:44px;
+  background:transparent;
+  display:flex;align-items:center;justify-content:center;
+}
+.tl-logo img{
+  width:100%;height:100%;object-fit:contain;
+  filter:brightness(1.1) drop-shadow(0 1px 4px rgba(0,0,0,.4));
+}
+.tl-dot{
+  width:9px;height:9px;border-radius:50%;
+  background:var(--s3);border:1.5px solid var(--t3);
+  position:absolute;left:115px;top:26px;z-index:1;
+  transition:all .2s;
+}
+.tl-item:hover .tl-dot{background:var(--amber);border-color:var(--amber)}
+.tl-item:first-child .tl-dot{background:var(--amber);border-color:var(--amber);box-shadow:0 0 10px rgba(240,180,41,.4)}
+
+.tl-right{
+  padding:14px 0 14px 24px;
+  border-left:none;
+}
+.tl-card{
+  background:var(--s1);border:1px solid var(--border);border-radius:12px;
+  padding:14px 16px;transition:all .2s;cursor:default;
+}
+.tl-card:hover{border-color:var(--borderhi);background:var(--s2)}
+.tl-item:first-child .tl-card{
+  border-color:rgba(240,180,41,.2);
+  background:linear-gradient(135deg,rgba(240,180,41,.04) 0%,var(--s1) 60%);
+}
+
+.ch{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.ch h4{font-size:13px;font-weight:700;color:var(--text);line-height:1.2}
+.ch .role{
+  font-family:'Fraunces',serif;font-style:italic;
+  font-size:11.5px;color:var(--amber);font-weight:300;margin-top:2px;
+}
+.ch .sup{font-size:9.5px;color:var(--t3);margin-top:3px}
+.ch .sup a{color:var(--blue);text-decoration:none}
+.ch .sup a:hover{text-decoration:underline}
+.now-badge{
+  padding:2px 9px;border-radius:20px;
+  background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.25);
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  color:var(--teal);letter-spacing:.06em;flex-shrink:0;
+  height:fit-content;
+}
+.cb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cl-label{font-size:8.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
+.bl{list-style:none;display:flex;flex-direction:column;gap:3px}
+.bl li{
+  font-size:10.5px;color:var(--t2);padding-left:12px;
+  position:relative;line-height:1.5;font-weight:300;
+}
+.bl li::before{content:'';position:absolute;left:0;top:7px;width:4px;height:1px;background:var(--amber);opacity:.5}
+.bl li.imp{color:#8ec98a}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{
+  padding:2px 8px;border-radius:3px;
+  background:rgba(77,157,224,.06);border:1px solid rgba(77,157,224,.1);
+  font-family:'DM Mono',monospace;font-size:8.5px;color:#6aaee8;
+  transition:all .15s;
+}
+.tag:hover{background:rgba(77,157,224,.12);border-color:rgba(77,157,224,.22)}
+
+/* bottom strip */
+.bottom-strip{
+  flex-shrink:0;
+  border-top:1px solid var(--border);
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;
+}
+.strip-btn{
+  display:flex;align-items:center;gap:10px;
+  padding:13px 20px;cursor:pointer;border:none;
+  background:transparent;color:var(--t2);
+  border-right:1px solid var(--border);
+  transition:all .18s;text-align:left;
+  font-family:'Outfit',sans-serif;
+}
+.strip-btn:last-child{border-right:none}
+.strip-btn:hover{background:var(--s1);color:var(--text)}
+.strip-icon{
+  width:30px;height:30px;border-radius:7px;flex-shrink:0;
+  background:var(--s2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .18s;
+}
+.strip-btn:hover .strip-icon{background:var(--amberdim);border-color:rgba(240,180,41,.25)}
+.strip-icon svg{width:13px;height:13px}
+.strip-txt p:first-child{font-size:11.5px;font-weight:600;color:inherit}
+.strip-txt p:last-child{font-size:9.5px;color:var(--t3);margin-top:1px}
+
+/* ── MODALS ── */
+.modal{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(12px);
+  z-index:999;align-items:center;justify-content:center;
+}
+.modal.open{display:flex;animation:mfade .2s ease}
+@keyframes mfade{from{opacity:0}to{opacity:1}}
+.mbox{
+  background:var(--s1);border:1px solid var(--borderhi);
+  border-radius:16px;padding:28px;
+  width:80%;max-width:820px;max-height:85vh;overflow-y:auto;
+  animation:mslide .25s ease;
+}
+@keyframes mslide{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.mbox::-webkit-scrollbar{width:3px}
+.mbox::-webkit-scrollbar-thumb{background:var(--border)}
+.mtitle{
+  font-family:'Fraunces',serif;font-style:italic;
+  font-size:20px;font-weight:600;color:var(--amber2);margin-bottom:20px;
+}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.mgrid img{width:100%;border-radius:8px;border:1px solid var(--border)}
+.mclose{
+  width:100%;padding:10px;border-radius:8px;
+  border:1px solid var(--border);background:transparent;
+  color:var(--t2);font-family:'Outfit',sans-serif;
+  font-size:12px;font-weight:600;cursor:pointer;
+  letter-spacing:.04em;transition:all .18s;
+}
+.mclose:hover{border-color:var(--amber);color:var(--amber);background:var(--amberdim)}
+
+/* ambient glow behind featured */
+.tl-item:first-child .tl-right::before{
+  content:'';position:absolute;
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(240,180,41,.04),transparent 70%);
+  right:-40px;top:-20px;pointer-events:none;
+}
+.tl-right{position:relative}
+</style>
 </head>
 <body>
 
-<div class="layout">
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sb">
+  <div class="sb-top">
+    <div class="av-row">
+      <div class="av">
+        <img src="myimage.jpeg" alt="Venkatesh" onerror="this.style.display='none'">
+      </div>
+      <div class="av-info">
+        <h1>Venkatesh<br>Mohan Sharma</h1>
+        <p class="role">Data Scientist · Associate Engineer</p>
+        <p class="loc">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Houston, Texas
+        </p>
+      </div>
+    </div>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/venkateshmsharma/" class="lnk" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/venky0010?tab=repositories" class="lnk" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+    </div>
+    <p class="email">vsharma@ryderscott.com</p>
+  </div>
 
-    <!-- ═══ SIDEBAR ═══ -->
-    <aside class="sidebar">
-
-        <div class="profile-wrap">
-            <img src="myimage.jpeg" alt="Venkatesh Mohan Sharma" onerror="this.src=''; this.style.background='var(--surface)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center';">
-            <div class="profile-dot"></div>
+  <div class="sb-scroll">
+    <div>
+      <p class="sec-label">About</p>
+      <p class="about-p">Results-oriented Engineer with experience in continuous improvement, analytics, automation, and product management. Skilled in stakeholder management, machine learning, and data analytics — delivering scalable, user-centric solutions by aligning technical capabilities with business needs. I bring high perseverance and grit to everything I do, and am a lifelong learner who thrives on growth. A soccer champion and strong academic performer, I'm wired to compete and built to win. Outside of work, I follow Manchester United and the Houston Astros.</p>
+    </div>
+    <div>
+      <p class="sec-label">Education</p>
+      <div class="edu-item">
+        <div class="edu-logo"><img src="uh.png" alt="UH" onerror="this.style.display='none'"></div>
+        <div class="edu-text">
+          <p>University of Houston</p>
+          <p>M.S. Industrial Engineering</p>
         </div>
-
-        <div class="name-block">
-            <h1>Venkatesh<br>Mohan Sharma</h1>
-            <p class="title">// DATA SCIENTIST · ASSOCIATE ENGINEER</p>
-            <div class="location-row">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-                Houston, Texas
-            </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-logo"><img src="vtu.png" alt="VTU" onerror="this.style.display='none'"></div>
+        <div class="edu-text">
+          <p>Visvesvaraya Technological Univ.</p>
+          <p>B.E. Mechanical Engineering</p>
         </div>
+      </div>
+    </div>
+  </div>
+</aside>
 
-        <div class="socials">
-            <a href="https://www.linkedin.com/in/venkateshmsharma/" class="social-btn" target="_blank">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-                LinkedIn
-            </a>
-            <a href="https://github.com/venky0010?tab=repositories" class="social-btn" target="_blank">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                GitHub
-            </a>
+<!-- ═══ MAIN ═══ -->
+<main class="main">
+  <div class="main-header">
+    <h2>Experience</h2>
+    <div class="tab-row">
+      <div class="tab active">All</div>
+      <div class="tab">Industry</div>
+      <div class="tab">Research</div>
+    </div>
+  </div>
+
+  <div class="exp-scroll">
+    <div class="timeline">
+
+      <!-- Ryder Scott -->
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-logo"><img src="rydersco.png" alt="RSC" onerror="this.style.display='none'"></div>
         </div>
-
-        <p class="email-tag">vsharma@ryderscott.com</p>
-
-        <div class="s-sec">
-            <p class="s-label">About</p>
-            <p class="about-text">Results-oriented Engineer with experience in continuous improvement, analytics, automation, and product management. Skilled in stakeholder management, machine learning, and data analytics — delivering scalable, user-centric solutions by aligning technical capabilities with business needs. I bring high perseverance and grit to everything I do, and am a lifelong learner who thrives on growth. A soccer champion and strong academic performer, I'm wired to compete and built to win. Outside of work, I follow Manchester United and the Houston Astros.</p>
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="ch">
+              <div>
+                <h4>Ryder Scott Company</h4>
+                <p class="role">Data Scientist</p>
+                <p class="sup">Current Role · Houston, TX</p>
+              </div>
+              <span class="now-badge">NOW</span>
+            </div>
+            <div class="cb">
+              <div>
+                <p class="cl-label">Projects</p>
+                <ul class="bl">
+                  <li>Reservoir data science &amp; analytics</li>
+                  <li>Machine learning for reserves estimation</li>
+                </ul>
+              </div>
+              <div>
+                <p class="cl-label">Tools</p>
+                <div class="tags">
+                  <span class="tag">Python</span><span class="tag">Machine Learning</span>
+                  <span class="tag">Data Science</span><span class="tag">Petroleum Analytics</span>
+                  <span class="tag">Spotfire</span><span class="tag">LLMs</span>
+                  <span class="tag">Claude AI</span><span class="tag">Aries</span><span class="tag">PHDWin</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div class="s-sec">
-            <p class="s-label">Education</p>
-            <div class="edu-list">
-                <div class="edu-item">
-                    <div class="logo-box">
-                        <img src="uh.png" alt="UH" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">UH</span>
-                    </div>
-                    <div class="edu-text">
-                        <p>University of Houston</p>
-                        <p>M.S. Industrial Engineering</p>
-                    </div>
-                </div>
-                <div class="edu-item">
-                    <div class="logo-box">
-                        <img src="vtu.png" alt="VTU" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">VTU</span>
-                    </div>
-                    <div class="edu-text">
-                        <p>Visvesvaraya Technological Univ.</p>
-                        <p>B.E. Mechanical Engineering</p>
-                    </div>
-                </div>
-            </div>
+      <!-- EnPro -->
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-logo"><img src="enpro.png" alt="EnPro" onerror="this.style.display='none'"></div>
         </div>
-
-    </aside>
-
-    <!-- ═══ MAIN ═══ -->
-    <main class="main">
-
-        <div class="section-title">
-            <h2>Experience</h2>
-            <div class="divider"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="ch">
+              <div>
+                <h4>EnPro Industries</h4>
+                <p class="role">Product Owner Intern</p>
+                <p class="sup">Supervisor: <a href="#">Hao Dinh</a></p>
+              </div>
+            </div>
+            <div class="cb">
+              <div>
+                <p class="cl-label">Impact</p>
+                <ul class="bl">
+                  <li class="imp">Saved $270K per year</li>
+                  <li class="imp">Eliminated 240+ manual hours annually</li>
+                </ul>
+              </div>
+              <div>
+                <p class="cl-label">Tools</p>
+                <div class="tags">
+                  <span class="tag">Automation Anywhere</span><span class="tag">Azure AI</span>
+                  <span class="tag">Power Automate</span><span class="tag">Python</span>
+                  <span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">AWS Redshift</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div class="exp-grid">
-
-            <!-- Ryder Scott — FEATURED -->
-            <div class="card featured">
-                <div class="card-head">
-                    <div class="card-logo"><img src="rydersco.png" alt="Ryder Scott" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">RSC</span></div>
-                    <div class="card-meta">
-                        <h4>Ryder Scott Company</h4>
-                        <p class="role">Data Scientist</p>
-                        <p class="sup">Current Role &nbsp;·&nbsp; Houston, TX</p>
-                    </div>
-                    <span class="badge-latest">LATEST</span>
-                </div>
-                <div class="card-div"></div>
-                <div class="card-body">
-                    <div>
-                        <p class="col-label">Projects</p>
-                        <ul class="bullet-list">
-                            <li>Reservoir data science &amp; analytics</li>
-                            <li>Machine learning for reserves estimation</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="col-label">Skills / Tools</p>
-                        <div class="tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Machine Learning</span>
-                            <span class="tag">Data Science</span>
-                            <span class="tag">Petroleum Analytics</span>
-                            <span class="tag">Spotfire</span>
-                            <span class="tag">LLMs</span>
-                            <span class="tag">Claude AI</span>
-                            <span class="tag">Aries</span>
-                            <span class="tag">PHDWin</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- EnPro -->
-            <div class="card">
-                <div class="card-head">
-                    <div class="card-logo"><img src="enpro.png" alt="EnPro" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">EP</span></div>
-                    <div class="card-meta">
-                        <h4>EnPro Industries</h4>
-                        <p class="role">Product Owner Intern</p>
-                        <p class="sup">Supervisor: <a href="#">Hao Dinh</a></p>
-                    </div>
-                </div>
-                <div class="card-div"></div>
-                <div class="card-body">
-                    <div>
-                        <p class="col-label">Impact</p>
-                        <ul class="bullet-list">
-                            <li class="impact-li">Saved $270K per year</li>
-                            <li class="impact-li">Eliminated 240+ manual hours annually</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="col-label">Tools</p>
-                        <div class="tags">
-                            <span class="tag">Automation Anywhere</span>
-                            <span class="tag">Azure AI</span>
-                            <span class="tag">Power Automate</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">Power BI</span>
-                            <span class="tag">SQL</span>
-                            <span class="tag">AWS Redshift</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Garlock -->
-            <div class="card">
-                <div class="card-head">
-                    <div class="card-logo"><img src="garlock.png" alt="Garlock" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">GRL</span></div>
-                    <div class="card-meta">
-                        <h4>Garlock</h4>
-                        <p class="role">Industrial Engineering &amp; Analytics Intern</p>
-                        <p class="sup">Supervisor: <a href="#">Aldo Ovalle</a></p>
-                    </div>
-                </div>
-                <div class="card-div"></div>
-                <div class="card-body">
-                    <div>
-                        <p class="col-label">Impact</p>
-                        <ul class="bullet-list">
-                            <li class="impact-li">Increased production by 17%</li>
-                            <li class="impact-li">Reduced variance by 12%</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="col-label">Tools</p>
-                        <div class="tags">
-                            <span class="tag">Lean / Six Sigma</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">Power BI</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ASML -->
-            <div class="card">
-                <div class="card-head">
-                    <div class="card-logo"><img src="asml.png" alt="ASML" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">ASML</span></div>
-                    <div class="card-meta">
-                        <h4>ASML</h4>
-                        <p class="role">Data Analytics Intern</p>
-                        <p class="sup">Supervisor: <a href="#">Dylan Holton</a></p>
-                    </div>
-                </div>
-                <div class="card-div"></div>
-                <div class="card-body">
-                    <div>
-                        <p class="col-label">Impact</p>
-                        <ul class="bullet-list">
-                            <li class="impact-li">Improved PM process 3×</li>
-                            <li class="impact-li">+80% on-time PM completion rate</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="col-label">Tools</p>
-                        <div class="tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Power Automate</span>
-                            <span class="tag">Spotfire</span>
-                            <span class="tag">Correlation</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Robert Bosch Centre -->
-            <div class="card">
-                <div class="card-head">
-                    <div class="card-logo"><img src="rbc.png" alt="RBC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">RBC</span></div>
-                    <div class="card-meta">
-                        <h4>Robert Bosch Centre for DS &amp; AI</h4>
-                        <p class="role">Project Associate</p>
-                        <p class="sup">Supervisor: <a href="https://doms.iitm.ac.in/index.php/nandan-s" target="_blank">Nandan Sudarsanam</a></p>
-                    </div>
-                </div>
-                <div class="card-div"></div>
-                <div class="card-body">
-                    <div>
-                        <p class="col-label">Impact</p>
-                        <ul class="bullet-list">
-                            <li class="impact-li">Replaced month-long reconciliation with Knowledge Graph</li>
-                            <li class="impact-li">+15% click-through rate</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="col-label">Tools</p>
-                        <div class="tags">
-                            <span class="tag">PyTorch</span>
-                            <span class="tag">Keras</span>
-                            <span class="tag">Contextual Bandit</span>
-                            <span class="tag">ARIMA</span>
-                            <span class="tag">Deep-AR</span>
-                            <span class="tag">CART</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bauer College -->
-            <div class="card">
-                <div class="card-head">
-                    <div class="card-logo"><img src="bauer.jpeg" alt="Bauer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">BCB</span></div>
-                    <div class="card-meta">
-                        <h4>Bauer College of Business, UH</h4>
-                        <p class="role">Instructional Assistant</p>
-                        <p class="sup">Supervisor: <a href="https://www.bauer.uh.edu/search/directory/profile.asp?firstname=Ravi&lastname=Aron" target="_blank">Ravi Aron</a></p>
-                    </div>
-                </div>
-                <div class="card-div"></div>
-                <div class="card-body">
-                    <div>
-                        <p class="col-label">Projects</p>
-                        <ul class="bullet-list">
-                            <li>Experimental Design &amp; Market Research</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="col-label">Tools</p>
-                        <div class="tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">STATA</span>
-                            <span class="tag">Factor Analysis</span>
-                            <span class="tag">Regression</span>
-                            <span class="tag">VIF</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- IIT Madras -->
-            <div class="card">
-                <div class="card-head">
-                    <div class="card-logo"><img src="doms.png" alt="IIT Madras" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">IITM</span></div>
-                    <div class="card-meta">
-                        <h4>IIT Madras</h4>
-                        <p class="role">Data Science Intern</p>
-                        <p class="sup">Supervisor: <a href="https://doms.iitm.ac.in/index.php/rrm" target="_blank">Rahul Marathe</a></p>
-                    </div>
-                </div>
-                <div class="card-div"></div>
-                <div class="card-body">
-                    <div>
-                        <p class="col-label">Projects</p>
-                        <ul class="bullet-list">
-                            <li>Multivariate Regression, Clustering &amp; ANOVA</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p class="col-label">Tools</p>
-                        <div class="tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">SPSS-AMOS</span>
-                            <span class="tag">Clustering</span>
-                            <span class="tag">ANOVA</span>
-                            <span class="tag">KNN</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+      <!-- Garlock -->
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-logo"><img src="garlock.png" alt="Garlock" onerror="this.style.display='none'"></div>
         </div>
-
-        <!-- More section -->
-        <div class="section-title">
-            <h2>More</h2>
-            <div class="divider"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="ch">
+              <div>
+                <h4>Garlock</h4>
+                <p class="role">Industrial Engineering &amp; Analytics Intern</p>
+                <p class="sup">Supervisor: <a href="#">Aldo Ovalle</a></p>
+              </div>
+            </div>
+            <div class="cb">
+              <div>
+                <p class="cl-label">Impact</p>
+                <ul class="bl">
+                  <li class="imp">Increased production by 17%</li>
+                  <li class="imp">Reduced variance by 12%</li>
+                </ul>
+              </div>
+              <div>
+                <p class="cl-label">Tools</p>
+                <div class="tags">
+                  <span class="tag">Lean / Six Sigma</span><span class="tag">Python</span><span class="tag">Power BI</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div class="actions-grid">
-            <div class="action-btn" onclick="document.getElementById('recoModal').classList.add('open')">
-                <div class="btn-icon-wrap">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-                </div>
-                <p class="btn-label">Recommendations</p>
-                <p class="btn-desc">Endorsements from supervisors &amp; colleagues</p>
-            </div>
-            <div class="action-btn" onclick="document.getElementById('pubModal').classList.add('open')">
-                <div class="btn-icon-wrap">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                </div>
-                <p class="btn-label">Publication</p>
-                <p class="btn-desc">Peer-reviewed research &amp; papers</p>
-            </div>
-            <div class="action-btn" onclick="document.getElementById('cvModal').classList.add('open')">
-                <div class="btn-icon-wrap">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><path d="M13 8h4M13 12h4M13 16h4"/></svg>
-                </div>
-                <p class="btn-label">Resume</p>
-                <p class="btn-desc">Full CV &amp; work history</p>
-            </div>
+      <!-- ASML -->
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-logo"><img src="asml.png" alt="ASML" onerror="this.style.display='none'"></div>
         </div>
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="ch">
+              <div>
+                <h4>ASML</h4>
+                <p class="role">Data Analytics Intern</p>
+                <p class="sup">Supervisor: <a href="#">Dylan Holton</a></p>
+              </div>
+            </div>
+            <div class="cb">
+              <div>
+                <p class="cl-label">Impact</p>
+                <ul class="bl">
+                  <li class="imp">Improved PM process 3×</li>
+                  <li class="imp">+80% on-time PM completion rate</li>
+                </ul>
+              </div>
+              <div>
+                <p class="cl-label">Tools</p>
+                <div class="tags">
+                  <span class="tag">Python</span><span class="tag">Power Automate</span>
+                  <span class="tag">Spotfire</span><span class="tag">Correlation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    </main>
+      <!-- Robert Bosch Centre -->
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-logo"><img src="rbc.png" alt="RBC" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="ch">
+              <div>
+                <h4>Robert Bosch Centre for DS &amp; AI</h4>
+                <p class="role">Project Associate</p>
+                <p class="sup">Supervisor: <a href="https://doms.iitm.ac.in/index.php/nandan-s" target="_blank">Nandan Sudarsanam</a></p>
+              </div>
+            </div>
+            <div class="cb">
+              <div>
+                <p class="cl-label">Impact</p>
+                <ul class="bl">
+                  <li class="imp">Replaced month-long reconciliation with Knowledge Graph</li>
+                  <li class="imp">+15% click-through rate</li>
+                </ul>
+              </div>
+              <div>
+                <p class="cl-label">Tools</p>
+                <div class="tags">
+                  <span class="tag">PyTorch</span><span class="tag">Keras</span>
+                  <span class="tag">Contextual Bandit</span><span class="tag">ARIMA</span>
+                  <span class="tag">Deep-AR</span><span class="tag">CART</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bauer College -->
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-logo"><img src="bauer.jpeg" alt="Bauer" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="ch">
+              <div>
+                <h4>Bauer College of Business, UH</h4>
+                <p class="role">Instructional Assistant</p>
+                <p class="sup">Supervisor: <a href="https://www.bauer.uh.edu/search/directory/profile.asp?firstname=Ravi&lastname=Aron" target="_blank">Ravi Aron</a></p>
+              </div>
+            </div>
+            <div class="cb">
+              <div>
+                <p class="cl-label">Projects</p>
+                <ul class="bl">
+                  <li>Experimental Design &amp; Market Research</li>
+                </ul>
+              </div>
+              <div>
+                <p class="cl-label">Tools</p>
+                <div class="tags">
+                  <span class="tag">Python</span><span class="tag">STATA</span>
+                  <span class="tag">Factor Analysis</span><span class="tag">Regression</span><span class="tag">VIF</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IIT Madras -->
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-logo"><img src="doms.png" alt="IITM" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="ch">
+              <div>
+                <h4>IIT Madras</h4>
+                <p class="role">Data Science Intern</p>
+                <p class="sup">Supervisor: <a href="https://doms.iitm.ac.in/index.php/rrm" target="_blank">Rahul Marathe</a></p>
+              </div>
+            </div>
+            <div class="cb">
+              <div>
+                <p class="cl-label">Projects</p>
+                <ul class="bl">
+                  <li>Multivariate Regression, Clustering &amp; ANOVA</li>
+                </ul>
+              </div>
+              <div>
+                <p class="cl-label">Tools</p>
+                <div class="tags">
+                  <span class="tag">Python</span><span class="tag">SPSS-AMOS</span>
+                  <span class="tag">Clustering</span><span class="tag">ANOVA</span><span class="tag">KNN</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom strip -->
+  <div class="bottom-strip">
+    <button class="strip-btn" onclick="document.getElementById('recoModal').classList.add('open')">
+      <div class="strip-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="strip-txt">
+        <p>Recommendations</p>
+        <p>From supervisors &amp; colleagues</p>
+      </div>
+    </button>
+    <button class="strip-btn" onclick="document.getElementById('pubModal').classList.add('open')">
+      <div class="strip-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <div class="strip-txt">
+        <p>Publication</p>
+        <p>Peer-reviewed research</p>
+      </div>
+    </button>
+    <button class="strip-btn" onclick="document.getElementById('cvModal').classList.add('open')">
+      <div class="strip-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><path d="M13 8h4M13 12h4M13 16h4"/></svg>
+      </div>
+      <div class="strip-txt">
+        <p>Resume</p>
+        <p>Full CV &amp; work history</p>
+      </div>
+    </button>
+  </div>
+</main>
+
+<!-- MODALS -->
+<div id="recoModal" class="modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="mbox">
+    <p class="mtitle">Recommendations</p>
+    <div class="mgrid">
+      <img src="reco3.png" alt=""><img src="reco2.png" alt="">
+      <img src="reco1.png" alt=""><img src="reco4.png" alt="">
+    </div>
+    <button class="mclose" onclick="document.getElementById('recoModal').classList.remove('open')">Close</button>
+  </div>
 </div>
 
-<!-- ═══ MODALS ═══ -->
-
-<!-- Recommendations -->
-<div id="recoModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
-    <div class="modal-box">
-        <p class="modal-title">Recommendations</p>
-        <div class="modal-grid">
-            <img src="reco3.png" alt="Recommendation">
-            <img src="reco2.png" alt="Recommendation">
-            <img src="reco1.png" alt="Recommendation">
-            <img src="reco4.png" alt="Recommendation">
-        </div>
-        <button class="modal-close" onclick="document.getElementById('recoModal').classList.remove('open')">Close</button>
-    </div>
+<div id="pubModal" class="modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="mbox" style="max-width:560px;text-align:center">
+    <p class="mtitle">Publication</p>
+    <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0268190" target="_blank">
+      <img src="paper.png" alt="Publication" style="width:80%;border-radius:8px;border:1px solid var(--border);margin:0 auto 16px;display:block">
+    </a>
+    <button class="mclose" onclick="document.getElementById('pubModal').classList.remove('open')">Close</button>
+  </div>
 </div>
 
-<!-- Publication -->
-<div id="pubModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
-    <div class="modal-box" style="max-width:580px; text-align:center;">
-        <p class="modal-title">Publication</p>
-        <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0268190" target="_blank">
-            <img src="paper.png" alt="Publication" style="width:75%; border-radius:8px; border:1px solid var(--border); margin:0 auto 16px; display:block;">
-        </a>
-        <button class="modal-close" onclick="document.getElementById('pubModal').classList.remove('open')">Close</button>
-    </div>
-</div>
-
-<!-- Resume -->
-<div id="cvModal" class="modal-overlay" onclick="if(event.target===this)this.classList.remove('open')">
-    <div class="modal-box">
-        <p class="modal-title">Resume</p>
-        <iframe src="Venkatesh_Resume.pdf" style="width:100%;height:500px;border:none;border-radius:8px;background:#fff;" frameborder="0"></iframe>
-        <button class="modal-close" onclick="document.getElementById('cvModal').classList.remove('open')">Close</button>
-    </div>
+<div id="cvModal" class="modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="mbox">
+    <p class="mtitle">Resume</p>
+    <iframe src="Venkatesh_Resume.pdf" style="width:100%;height:480px;border:none;border-radius:8px;background:#fff" frameborder="0"></iframe>
+    <button class="mclose" style="margin-top:12px" onclick="document.getElementById('cvModal').classList.remove('open')">Close</button>
+  </div>
 </div>
 
 </body>
