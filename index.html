@@ -4,346 +4,426 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Venkatesh Mohan Sharma</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Editorial+New:ital@0;1&family=Editorial+Old:ital@0;1&family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,600;1,300;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #080a0f;
-  --s1: #0d1019;
-  --s2: #111520;
-  --s3: #161c2a;
-  --border: rgba(255,255,255,0.06);
-  --borderhi: rgba(255,255,255,0.12);
-  --amber: #f0b429;
-  --amber2: #ffd166;
-  --amberdim: rgba(240,180,41,0.1);
-  --teal: #00d4aa;
-  --tealdim: rgba(0,212,170,0.08);
-  --blue: #4d9de0;
-  --bluedim: rgba(77,157,224,0.08);
-  --text: #e2e8f2;
-  --t2: #7c8fa8;
-  --t3: #3d4f66;
+:root{
+  --ink:#0a0b0e;
+  --ink2:#12141a;
+  --ink3:#1a1d26;
+  --ink4:#242836;
+  --rule:rgba(255,255,255,0.07);
+  --rulehi:rgba(255,255,255,0.13);
+  --gold:#d4a843;
+  --gold2:#f0c866;
+  --golddim:rgba(212,168,67,0.1);
+  --goldbright:rgba(212,168,67,0.25);
+  --cream:#f2ead8;
+  --red:#e05c5c;
+  --green:#5cc98a;
+  --blue:#5ba4d4;
+  --txt:#d8dde8;
+  --txt2:#7a8699;
+  --txt3:#3d4a5c;
 }
+
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{font-size:13px;height:100%}
+html{height:100vh;overflow:hidden}
 body{
-  font-family:'Outfit',sans-serif;
-  background:var(--bg);
-  color:var(--text);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--ink);
+  color:var(--txt);
   height:100vh;
   overflow:hidden;
   display:grid;
-  grid-template-columns:300px 1fr;
+  grid-template-columns:340px 1fr;
+  grid-template-rows:100vh;
 }
 
-/* ── SIDEBAR ── */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SIDEBAR — editorial newspaper column
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .sb{
-  background:var(--s1);
-  border-right:1px solid var(--border);
-  display:flex;
-  flex-direction:column;
-  height:100vh;
-  overflow:hidden;
+  background:var(--ink2);
+  border-right:1px solid var(--rule);
+  display:flex;flex-direction:column;
+  height:100vh;overflow:hidden;
   position:relative;
 }
-.sb-top{
-  padding:28px 24px 20px;
-  border-bottom:1px solid var(--border);
+
+/* big decorative number behind photo */
+.sb-hero{
+  position:relative;
+  padding:28px 28px 0;
   flex-shrink:0;
 }
-.sb-scroll{
-  flex:1;
-  overflow-y:auto;
-  overflow-x:hidden;
-  padding:20px 24px 24px;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-.sb-scroll::-webkit-scrollbar{width:0}
-
-/* avatar */
-.av-row{display:flex;align-items:center;gap:14px}
-.av{
-  width:58px;height:58px;border-radius:14px;flex-shrink:0;
-  background:var(--s3);overflow:hidden;position:relative;
-  border:1px solid var(--borderhi);
-}
-.av img{width:100%;height:100%;object-fit:cover}
-.av-info h1{
-  font-family:'Fraunces',serif;
-  font-size:17px;font-weight:600;line-height:1.2;color:#f0f4ff;
-}
-.av-info .role{
-  font-size:10.5px;color:var(--amber);font-weight:500;
-  margin-top:3px;letter-spacing:0.03em;
-}
-.av-info .loc{
-  display:flex;align-items:center;gap:4px;
-  font-size:10px;color:var(--t3);margin-top:4px;
+.sb-hero::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(160deg,rgba(212,168,67,0.06) 0%,transparent 55%);
+  pointer-events:none;
 }
 
-/* links row */
-.links{display:flex;gap:6px;margin-top:14px}
+/* photo + name side by side */
+.identity{display:flex;align-items:flex-start;gap:16px;position:relative;z-index:1}
+.photo-frame{
+  width:78px;height:78px;flex-shrink:0;
+  border-radius:12px;overflow:hidden;
+  border:1px solid var(--rulehi);
+  position:relative;
+}
+.photo-frame::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(212,168,67,0.15),transparent 60%);
+}
+.photo-frame img{width:100%;height:100%;object-fit:cover;display:block}
+
+.name-block{flex:1;min-width:0}
+.name-block h1{
+  font-family:'Cormorant',serif;
+  font-size:26px;font-weight:600;line-height:1.1;
+  color:#eef1f8;letter-spacing:-0.02em;
+}
+.name-block h1 em{font-style:italic;color:var(--gold2)}
+.tagline{
+  font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-top:7px;
+}
+.loc-row{
+  display:flex;align-items:center;gap:5px;
+  font-size:10px;color:var(--txt3);margin-top:6px;
+}
+
+/* horizontal rule with label */
+.hr-rule{
+  display:flex;align-items:center;gap:10px;
+  margin:18px 0 0;
+}
+.hr-rule::before,.hr-rule::after{
+  content:'';flex:1;height:1px;background:var(--rule);
+}
+.hr-rule span{
+  font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--txt3);
+  font-weight:600;white-space:nowrap;
+}
+
+/* links */
+.links{
+  display:flex;gap:6px;padding:12px 28px 0;flex-shrink:0;
+}
 .lnk{
   flex:1;display:flex;align-items:center;justify-content:center;gap:5px;
-  padding:7px 8px;border-radius:8px;border:1px solid var(--border);
-  background:var(--s2);color:var(--t2);font-size:10.5px;font-weight:500;
+  padding:8px;border-radius:8px;border:1px solid var(--rule);
+  background:var(--ink3);color:var(--txt2);
+  font-size:10px;font-weight:600;letter-spacing:.02em;
   text-decoration:none;transition:all .18s;
 }
-.lnk:hover{border-color:var(--teal);color:var(--teal);background:var(--tealdim)}
-.lnk svg{width:12px;height:12px;flex-shrink:0}
-.email{
-  font-family:'DM Mono',monospace;font-size:9.5px;
-  color:var(--t3);text-align:center;margin-top:8px;letter-spacing:.01em;
+.lnk svg{width:11px;height:11px;flex-shrink:0}
+.lnk:hover{border-color:var(--gold);color:var(--gold);background:var(--golddim)}
+
+.email-row{
+  font-family:'DM Mono',monospace;font-size:9px;
+  color:var(--gold);text-align:center;padding:10px 28px 0;
+  letter-spacing:.04em;flex-shrink:0;opacity:.8;
 }
 
-/* sidebar sections */
-.sec-label{
-  font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--t3);margin-bottom:10px;
+/* scrollable lower sidebar */
+.sb-body{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  padding:16px 28px 24px;
+  display:flex;flex-direction:column;gap:18px;
 }
-.about-p{
-  font-size:11px;line-height:1.75;color:var(--t2);font-weight:300;
+.sb-body::-webkit-scrollbar{width:0}
+
+.sec-hd{
+  font-size:8.5px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--txt3);
+  margin-bottom:10px;display:flex;align-items:center;gap:8px;
+}
+.sec-hd::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+.about-text{
+  font-family:'Cormorant',serif;
+  font-size:14.5px;line-height:1.75;color:#8a97ab;
+  font-weight:300;
 }
 
-/* education */
+/* edu items */
 .edu-item{
-  display:flex;align-items:center;gap:10px;
-  padding:9px 10px;border-radius:9px;
+  display:flex;align-items:center;gap:12px;
+  padding:8px 10px;border-radius:8px;
   border:1px solid transparent;transition:all .18s;
+  cursor:default;
 }
-.edu-item:hover{background:var(--s2);border-color:var(--border)}
+.edu-item:hover{background:var(--ink3);border-color:var(--rule)}
 .edu-logo{
-  width:36px;height:36px;flex-shrink:0;
-  background:transparent;display:flex;align-items:center;justify-content:center;
+  width:38px;height:38px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
 }
-.edu-logo img{width:100%;height:100%;object-fit:contain;filter:brightness(1.1)}
-.edu-text p:first-child{font-size:11.5px;font-weight:600;color:var(--text)}
-.edu-text p:last-child{font-size:9.5px;color:var(--t3);margin-top:1px}
+.edu-logo img{width:100%;height:100%;object-fit:contain;filter:brightness(1.1) drop-shadow(0 1px 3px rgba(0,0,0,.5))}
+.edu-text p:first-child{font-size:11.5px;font-weight:600;color:var(--txt)}
+.edu-text p:last-child{font-size:9.5px;color:var(--txt3);margin-top:1px}
 
-/* ── MAIN ── */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MAIN — bento experience grid
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .main{
   display:flex;flex-direction:column;
   height:100vh;overflow:hidden;
-  background:var(--bg);
+  background:var(--ink);
 }
-.main-header{
-  padding:20px 28px 16px;
+
+/* top bar */
+.topbar{
+  padding:0 32px;height:52px;
   display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid var(--rule);
   flex-shrink:0;
 }
-.main-header h2{
-  font-family:'Fraunces',serif;font-style:italic;
-  font-size:22px;font-weight:600;color:var(--text);
+.topbar-left{display:flex;align-items:baseline;gap:14px}
+.topbar-left h2{
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:28px;font-weight:300;color:var(--txt);letter-spacing:-.01em;
 }
-.tab-row{display:flex;gap:4px}
-.tab{
-  padding:5px 14px;border-radius:6px;border:1px solid transparent;
-  font-size:11px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .15s;
+.exp-count{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--txt3);letter-spacing:.04em;
 }
-.tab.active,.tab:hover{background:var(--s2);border-color:var(--borderhi);color:var(--text)}
+.now-pill{
+  display:flex;align-items:center;gap:6px;
+  padding:5px 12px;border-radius:20px;
+  background:var(--golddim);border:1px solid var(--goldbright);
+  font-size:10px;font-weight:600;color:var(--gold2);letter-spacing:.04em;
+}
+.now-dot{width:6px;height:6px;border-radius:50%;background:var(--gold2);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* experience scroll area */
-.exp-scroll{
+/* experience scroll */
+.exp-wrap{
   flex:1;overflow-y:auto;overflow-x:hidden;
-  padding:16px 28px 20px;
+  padding:20px 32px 20px;
 }
-.exp-scroll::-webkit-scrollbar{width:3px}
-.exp-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.exp-wrap::-webkit-scrollbar{width:3px}
+.exp-wrap::-webkit-scrollbar-thumb{background:var(--rule);border-radius:2px}
 
-/* timeline layout */
-.timeline{display:flex;flex-direction:column;gap:0}
-.tl-item{
-  display:grid;grid-template-columns:120px 1fr;
-  gap:0;position:relative;
+/* ── FEATURED CARD (Ryder Scott) ── */
+.card-featured{
+  background:var(--ink2);
+  border:1px solid rgba(212,168,67,0.22);
+  border-radius:16px;
+  margin-bottom:12px;
+  padding:22px 24px;
+  position:relative;overflow:hidden;
+  transition:border-color .2s,transform .2s;
 }
-.tl-item::before{
+.card-featured:hover{border-color:rgba(212,168,67,.38);transform:translateY(-1px)}
+.card-featured::before{
   content:'';position:absolute;
-  left:119px;top:24px;bottom:-1px;
-  width:1px;background:var(--border);
+  top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
 }
-.tl-item:last-child::before{display:none}
-.tl-left{
-  padding:14px 16px 14px 0;
-  display:flex;flex-direction:column;align-items:flex-end;
-  gap:6px;flex-shrink:0;
+.card-featured::after{
+  content:'';position:absolute;
+  top:-60px;right:-60px;
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,168,67,0.07),transparent 70%);
+  pointer-events:none;
 }
-.tl-logo{
-  width:44px;height:44px;
-  background:transparent;
-  display:flex;align-items:center;justify-content:center;
+
+/* ── GRID of smaller cards ── */
+.cards-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
 }
-.tl-logo img{
-  width:100%;height:100%;object-fit:contain;
-  filter:brightness(1.1) drop-shadow(0 1px 4px rgba(0,0,0,.4));
-}
-.tl-dot{
-  width:9px;height:9px;border-radius:50%;
-  background:var(--s3);border:1.5px solid var(--t3);
-  position:absolute;left:115px;top:26px;z-index:1;
+.card{
+  background:var(--ink2);
+  border:1px solid var(--rule);
+  border-radius:14px;padding:16px 18px;
+  position:relative;overflow:hidden;
   transition:all .2s;
 }
-.tl-item:hover .tl-dot{background:var(--amber);border-color:var(--amber)}
-.tl-item:first-child .tl-dot{background:var(--amber);border-color:var(--amber);box-shadow:0 0 10px rgba(240,180,41,.4)}
-
-.tl-right{
-  padding:14px 0 14px 24px;
-  border-left:none;
-}
-.tl-card{
-  background:var(--s1);border:1px solid var(--border);border-radius:12px;
-  padding:14px 16px;transition:all .2s;cursor:default;
-}
-.tl-card:hover{border-color:var(--borderhi);background:var(--s2)}
-.tl-item:first-child .tl-card{
-  border-color:rgba(240,180,41,.2);
-  background:linear-gradient(135deg,rgba(240,180,41,.04) 0%,var(--s1) 60%);
+.card:hover{
+  background:var(--ink3);
+  border-color:var(--rulehi);
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(0,0,0,.3);
 }
 
-.ch{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
-.ch h4{font-size:13px;font-weight:700;color:var(--text);line-height:1.2}
-.ch .role{
-  font-family:'Fraunces',serif;font-style:italic;
-  font-size:11.5px;color:var(--amber);font-weight:300;margin-top:2px;
+/* card internals shared */
+.card-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.c-logo{
+  width:40px;height:40px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
 }
-.ch .sup{font-size:9.5px;color:var(--t3);margin-top:3px}
-.ch .sup a{color:var(--blue);text-decoration:none}
-.ch .sup a:hover{text-decoration:underline}
-.now-badge{
+.c-logo img{
+  width:100%;height:100%;object-fit:contain;
+  filter:brightness(1.1) drop-shadow(0 1px 4px rgba(0,0,0,.5));
+}
+.c-info{flex:1;min-width:0}
+.c-info h4{font-size:13px;font-weight:700;color:#e8ecf4;line-height:1.2}
+.c-info .role{
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:12px;color:var(--gold);font-weight:300;margin-top:2px;
+}
+.c-info .sup{font-size:9.5px;color:var(--txt3);margin-top:3px}
+.c-info .sup a{color:var(--blue);text-decoration:none}
+.c-info .sup a:hover{text-decoration:underline}
+
+.badge-now{
   padding:2px 9px;border-radius:20px;
-  background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.25);
-  font-family:'DM Mono',monospace;font-size:8.5px;
-  color:var(--teal);letter-spacing:.06em;flex-shrink:0;
-  height:fit-content;
+  background:var(--golddim);border:1px solid var(--goldbright);
+  font-family:'DM Mono',monospace;font-size:8px;
+  color:var(--gold2);letter-spacing:.08em;
+  flex-shrink:0;height:fit-content;
 }
-.cb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.cl-label{font-size:8.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:6px}
-.bl{list-style:none;display:flex;flex-direction:column;gap:3px}
-.bl li{
-  font-size:10.5px;color:var(--t2);padding-left:12px;
-  position:relative;line-height:1.5;font-weight:300;
+
+.divider{height:1px;background:var(--rule);margin:10px 0}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.col-lbl{
+  font-size:8.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--txt3);margin-bottom:7px;
 }
-.bl li::before{content:'';position:absolute;left:0;top:7px;width:4px;height:1px;background:var(--amber);opacity:.5}
-.bl li.imp{color:#8ec98a}
+.blist{list-style:none;display:flex;flex-direction:column;gap:4px}
+.blist li{
+  font-size:11px;color:#7a8a9e;padding-left:13px;
+  position:relative;line-height:1.5;font-weight:400;
+}
+.blist li::before{
+  content:'';position:absolute;left:0;top:7px;
+  width:5px;height:1px;background:var(--gold);opacity:.45;
+}
+.blist li.g{color:#7abf96}
+
 .tags{display:flex;flex-wrap:wrap;gap:4px}
 .tag{
-  padding:2px 8px;border-radius:3px;
-  background:rgba(77,157,224,.06);border:1px solid rgba(77,157,224,.1);
-  font-family:'DM Mono',monospace;font-size:8.5px;color:#6aaee8;
-  transition:all .15s;
+  padding:2px 8px;border-radius:4px;
+  background:rgba(91,164,212,0.07);
+  border:1px solid rgba(91,164,212,0.12);
+  font-family:'DM Mono',monospace;font-size:8.5px;
+  color:#6ea8d4;transition:all .15s;white-space:nowrap;
 }
-.tag:hover{background:rgba(77,157,224,.12);border-color:rgba(77,157,224,.22)}
+.tag:hover{background:rgba(91,164,212,0.14);border-color:rgba(91,164,212,.24)}
 
-/* bottom strip */
-.bottom-strip{
+/* featured card bigger logo and text */
+.card-featured .c-logo{width:52px;height:52px}
+.card-featured .c-info h4{font-size:16px}
+.card-featured .c-info .role{font-size:14px}
+.card-featured .cols{grid-template-columns:1fr 1.3fr}
+
+/* bottom action row */
+.action-row{
   flex-shrink:0;
-  border-top:1px solid var(--border);
+  border-top:1px solid var(--rule);
   display:grid;grid-template-columns:repeat(3,1fr);
-  gap:0;
 }
-.strip-btn{
-  display:flex;align-items:center;gap:10px;
-  padding:13px 20px;cursor:pointer;border:none;
-  background:transparent;color:var(--t2);
-  border-right:1px solid var(--border);
-  transition:all .18s;text-align:left;
-  font-family:'Outfit',sans-serif;
+.act-btn{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 20px;
+  border:none;border-right:1px solid var(--rule);
+  background:transparent;cursor:pointer;
+  transition:background .18s;color:var(--txt2);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  text-align:left;
 }
-.strip-btn:last-child{border-right:none}
-.strip-btn:hover{background:var(--s1);color:var(--text)}
-.strip-icon{
-  width:30px;height:30px;border-radius:7px;flex-shrink:0;
-  background:var(--s2);border:1px solid var(--border);
+.act-btn:last-child{border-right:none}
+.act-btn:hover{background:var(--ink2)}
+.act-icon{
+  width:32px;height:32px;border-radius:8px;flex-shrink:0;
+  background:var(--ink3);border:1px solid var(--rule);
   display:flex;align-items:center;justify-content:center;
   transition:all .18s;
 }
-.strip-btn:hover .strip-icon{background:var(--amberdim);border-color:rgba(240,180,41,.25)}
-.strip-icon svg{width:13px;height:13px}
-.strip-txt p:first-child{font-size:11.5px;font-weight:600;color:inherit}
-.strip-txt p:last-child{font-size:9.5px;color:var(--t3);margin-top:1px}
+.act-btn:hover .act-icon{background:var(--golddim);border-color:var(--goldbright)}
+.act-icon svg{width:13px;height:13px;color:var(--txt2)}
+.act-btn:hover .act-icon svg{color:var(--gold)}
+.act-txt strong{display:block;font-size:12px;font-weight:600;color:var(--txt)}
+.act-txt span{font-size:9.5px;color:var(--txt3)}
+
+/* entry animation */
+.card-featured{animation:fadeup .5s ease both}
+.cards-grid .card:nth-child(1){animation:fadeup .5s .07s ease both}
+.cards-grid .card:nth-child(2){animation:fadeup .5s .12s ease both}
+.cards-grid .card:nth-child(3){animation:fadeup .5s .17s ease both}
+.cards-grid .card:nth-child(4){animation:fadeup .5s .22s ease both}
+.cards-grid .card:nth-child(5){animation:fadeup .5s .27s ease both}
+.cards-grid .card:nth-child(6){animation:fadeup .5s .32s ease both}
+@keyframes fadeup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── MODALS ── */
 .modal{
   display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.85);backdrop-filter:blur(12px);
+  background:rgba(5,6,10,.9);backdrop-filter:blur(14px);
   z-index:999;align-items:center;justify-content:center;
 }
 .modal.open{display:flex;animation:mfade .2s ease}
 @keyframes mfade{from{opacity:0}to{opacity:1}}
 .mbox{
-  background:var(--s1);border:1px solid var(--borderhi);
-  border-radius:16px;padding:28px;
-  width:80%;max-width:820px;max-height:85vh;overflow-y:auto;
-  animation:mslide .25s ease;
+  background:var(--ink2);border:1px solid var(--rulehi);
+  border-radius:18px;padding:30px;
+  width:80%;max-width:820px;max-height:86vh;overflow-y:auto;
+  animation:mup .25s ease;
 }
-@keyframes mslide{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes mup{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
 .mbox::-webkit-scrollbar{width:3px}
-.mbox::-webkit-scrollbar-thumb{background:var(--border)}
+.mbox::-webkit-scrollbar-thumb{background:var(--rule)}
 .mtitle{
-  font-family:'Fraunces',serif;font-style:italic;
-  font-size:20px;font-weight:600;color:var(--amber2);margin-bottom:20px;
+  font-family:'Cormorant',serif;font-style:italic;
+  font-size:22px;font-weight:600;color:var(--gold2);margin-bottom:20px;
 }
 .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.mgrid img{width:100%;border-radius:8px;border:1px solid var(--border)}
+.mgrid img{width:100%;border-radius:8px;border:1px solid var(--rule)}
 .mclose{
-  width:100%;padding:10px;border-radius:8px;
-  border:1px solid var(--border);background:transparent;
-  color:var(--t2);font-family:'Outfit',sans-serif;
+  width:100%;padding:11px;border-radius:9px;
+  border:1px solid var(--rule);background:transparent;
+  color:var(--txt2);font-family:'Plus Jakarta Sans',sans-serif;
   font-size:12px;font-weight:600;cursor:pointer;
-  letter-spacing:.04em;transition:all .18s;
+  transition:all .18s;letter-spacing:.04em;
 }
-.mclose:hover{border-color:var(--amber);color:var(--amber);background:var(--amberdim)}
-
-/* ambient glow behind featured */
-.tl-item:first-child .tl-right::before{
-  content:'';position:absolute;
-  width:200px;height:200px;border-radius:50%;
-  background:radial-gradient(circle,rgba(240,180,41,.04),transparent 70%);
-  right:-40px;top:-20px;pointer-events:none;
-}
-.tl-right{position:relative}
+.mclose:hover{border-color:var(--gold);color:var(--gold);background:var(--golddim)}
 </style>
 </head>
 <body>
 
-<!-- ═══ SIDEBAR ═══ -->
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
 <aside class="sb">
-  <div class="sb-top">
-    <div class="av-row">
-      <div class="av">
+
+  <div class="sb-hero">
+    <div class="identity">
+      <div class="photo-frame">
         <img src="myimage.jpeg" alt="Venkatesh" onerror="this.style.display='none'">
       </div>
-      <div class="av-info">
-        <h1>Venkatesh<br>Mohan Sharma</h1>
-        <p class="role">Data Scientist · Associate Engineer</p>
-        <p class="loc">
+      <div class="name-block">
+        <h1>Venkatesh<br><em>Mohan Sharma</em></h1>
+        <p class="tagline">Data Scientist · Engineer</p>
+        <p class="loc-row">
           <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
           Houston, Texas
         </p>
       </div>
     </div>
-    <div class="links">
-      <a href="https://www.linkedin.com/in/venkateshmsharma/" class="lnk" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
-      </a>
-      <a href="https://github.com/venky0010?tab=repositories" class="lnk" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-        GitHub
-      </a>
-    </div>
-    <p class="email">vsharma@ryderscott.com</p>
+    <div class="hr-rule" style="margin-bottom:0"><span>Connect</span></div>
   </div>
 
-  <div class="sb-scroll">
+  <div class="links">
+    <a href="https://www.linkedin.com/in/venkateshmsharma/" class="lnk" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+    </a>
+    <a href="https://github.com/venky0010?tab=repositories" class="lnk" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>GitHub
+    </a>
+  </div>
+  <p class="email-row">vsharma@ryderscott.com</p>
+
+  <div class="sb-body">
     <div>
-      <p class="sec-label">About</p>
-      <p class="about-p">Results-oriented Engineer with experience in continuous improvement, analytics, automation, and product management. Skilled in stakeholder management, machine learning, and data analytics — delivering scalable, user-centric solutions by aligning technical capabilities with business needs. I bring high perseverance and grit to everything I do, and am a lifelong learner who thrives on growth. A soccer champion and strong academic performer, I'm wired to compete and built to win. Outside of work, I follow Manchester United and the Houston Astros.</p>
+      <p class="sec-hd">About</p>
+      <p class="about-text">Results-oriented Engineer in continuous improvement, analytics, automation &amp; product management. High perseverance and grit — a lifelong learner, soccer champion, and strong academic performer wired to compete and built to win. Follower of Manchester United and the Houston Astros.</p>
     </div>
     <div>
-      <p class="sec-label">Education</p>
+      <p class="sec-hd">Education</p>
       <div class="edu-item">
         <div class="edu-logo"><img src="uh.png" alt="UH" onerror="this.style.display='none'"></div>
         <div class="edu-text">
@@ -351,7 +431,7 @@ body{
           <p>M.S. Industrial Engineering</p>
         </div>
       </div>
-      <div class="edu-item">
+      <div class="edu-item" style="margin-top:2px">
         <div class="edu-logo"><img src="vtu.png" alt="VTU" onerror="this.style.display='none'"></div>
         <div class="edu-text">
           <p>Visvesvaraya Technological Univ.</p>
@@ -360,264 +440,222 @@ body{
       </div>
     </div>
   </div>
+
 </aside>
 
-<!-- ═══ MAIN ═══ -->
+<!-- ═══════════════ MAIN ═══════════════ -->
 <main class="main">
-  <div class="main-header">
-    <h2>Experience</h2>
-    <div class="tab-row">
-      <div class="tab active">All</div>
-      <div class="tab">Industry</div>
-      <div class="tab">Research</div>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <h2>Experience</h2>
+      <span class="exp-count">07 roles</span>
+    </div>
+    <div class="now-pill">
+      <span class="now-dot"></span>
+      Ryder Scott Company · Active
     </div>
   </div>
 
-  <div class="exp-scroll">
-    <div class="timeline">
+  <div class="exp-wrap">
 
-      <!-- Ryder Scott -->
-      <div class="tl-item">
-        <div class="tl-left">
-          <div class="tl-logo"><img src="rydersco.png" alt="RSC" onerror="this.style.display='none'"></div>
+    <!-- FEATURED: Ryder Scott -->
+    <div class="card-featured">
+      <div class="card-top">
+        <div class="c-logo"><img src="rydersco.png" alt="RSC" onerror="this.style.display='none'"></div>
+        <div class="c-info">
+          <h4>Ryder Scott Company</h4>
+          <p class="role">Data Scientist</p>
+          <p class="sup">Current Role &nbsp;·&nbsp; Houston, TX</p>
         </div>
-        <div class="tl-dot"></div>
-        <div class="tl-right">
-          <div class="tl-card">
-            <div class="ch">
-              <div>
-                <h4>Ryder Scott Company</h4>
-                <p class="role">Data Scientist</p>
-                <p class="sup">Current Role · Houston, TX</p>
-              </div>
-              <span class="now-badge">NOW</span>
-            </div>
-            <div class="cb">
-              <div>
-                <p class="cl-label">Projects</p>
-                <ul class="bl">
-                  <li>Reservoir data science &amp; analytics</li>
-                  <li>Machine learning for reserves estimation</li>
-                </ul>
-              </div>
-              <div>
-                <p class="cl-label">Tools</p>
-                <div class="tags">
-                  <span class="tag">Python</span><span class="tag">Machine Learning</span>
-                  <span class="tag">Data Science</span><span class="tag">Petroleum Analytics</span>
-                  <span class="tag">Spotfire</span><span class="tag">LLMs</span>
-                  <span class="tag">Claude AI</span><span class="tag">Aries</span><span class="tag">PHDWin</span>
-                </div>
-              </div>
+        <span class="badge-now">CURRENT</span>
+      </div>
+      <div class="divider"></div>
+      <div class="cols">
+        <div>
+          <p class="col-lbl">Projects</p>
+          <ul class="blist">
+            <li>Reservoir data science &amp; analytics</li>
+            <li>Machine learning for reserves estimation</li>
+          </ul>
+        </div>
+        <div>
+          <p class="col-lbl">Stack</p>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">Machine Learning</span>
+            <span class="tag">Data Science</span><span class="tag">Petroleum Analytics</span>
+            <span class="tag">Spotfire</span><span class="tag">LLMs</span>
+            <span class="tag">Claude AI</span><span class="tag">Aries</span><span class="tag">PHDWin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRID: 6 cards 2-col -->
+    <div class="cards-grid">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="c-logo"><img src="enpro.png" alt="EnPro" onerror="this.style.display='none'"></div>
+          <div class="c-info">
+            <h4>EnPro Industries</h4>
+            <p class="role">Product Owner Intern</p>
+            <p class="sup">Supervisor: <a href="#">Hao Dinh</a></p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="cols">
+          <div>
+            <p class="col-lbl">Impact</p>
+            <ul class="blist">
+              <li class="g">Saved $270K / year</li>
+              <li class="g">Eliminated 240+ manual hrs</li>
+            </ul>
+          </div>
+          <div>
+            <p class="col-lbl">Tools</p>
+            <div class="tags">
+              <span class="tag">Automation Anywhere</span><span class="tag">Azure AI</span>
+              <span class="tag">Power Automate</span><span class="tag">Python</span>
+              <span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">AWS Redshift</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- EnPro -->
-      <div class="tl-item">
-        <div class="tl-left">
-          <div class="tl-logo"><img src="enpro.png" alt="EnPro" onerror="this.style.display='none'"></div>
+      <div class="card">
+        <div class="card-top">
+          <div class="c-logo"><img src="garlock.png" alt="Garlock" onerror="this.style.display='none'"></div>
+          <div class="c-info">
+            <h4>Garlock</h4>
+            <p class="role">Industrial Eng. &amp; Analytics Intern</p>
+            <p class="sup">Supervisor: <a href="#">Aldo Ovalle</a></p>
+          </div>
         </div>
-        <div class="tl-dot"></div>
-        <div class="tl-right">
-          <div class="tl-card">
-            <div class="ch">
-              <div>
-                <h4>EnPro Industries</h4>
-                <p class="role">Product Owner Intern</p>
-                <p class="sup">Supervisor: <a href="#">Hao Dinh</a></p>
-              </div>
-            </div>
-            <div class="cb">
-              <div>
-                <p class="cl-label">Impact</p>
-                <ul class="bl">
-                  <li class="imp">Saved $270K per year</li>
-                  <li class="imp">Eliminated 240+ manual hours annually</li>
-                </ul>
-              </div>
-              <div>
-                <p class="cl-label">Tools</p>
-                <div class="tags">
-                  <span class="tag">Automation Anywhere</span><span class="tag">Azure AI</span>
-                  <span class="tag">Power Automate</span><span class="tag">Python</span>
-                  <span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">AWS Redshift</span>
-                </div>
-              </div>
+        <div class="divider"></div>
+        <div class="cols">
+          <div>
+            <p class="col-lbl">Impact</p>
+            <ul class="blist">
+              <li class="g">↑ Production by 17%</li>
+              <li class="g">↓ Variance by 12%</li>
+            </ul>
+          </div>
+          <div>
+            <p class="col-lbl">Tools</p>
+            <div class="tags">
+              <span class="tag">Lean / Six Sigma</span><span class="tag">Python</span><span class="tag">Power BI</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Garlock -->
-      <div class="tl-item">
-        <div class="tl-left">
-          <div class="tl-logo"><img src="garlock.png" alt="Garlock" onerror="this.style.display='none'"></div>
+      <div class="card">
+        <div class="card-top">
+          <div class="c-logo"><img src="asml.png" alt="ASML" onerror="this.style.display='none'"></div>
+          <div class="c-info">
+            <h4>ASML</h4>
+            <p class="role">Data Analytics Intern</p>
+            <p class="sup">Supervisor: <a href="#">Dylan Holton</a></p>
+          </div>
         </div>
-        <div class="tl-dot"></div>
-        <div class="tl-right">
-          <div class="tl-card">
-            <div class="ch">
-              <div>
-                <h4>Garlock</h4>
-                <p class="role">Industrial Engineering &amp; Analytics Intern</p>
-                <p class="sup">Supervisor: <a href="#">Aldo Ovalle</a></p>
-              </div>
-            </div>
-            <div class="cb">
-              <div>
-                <p class="cl-label">Impact</p>
-                <ul class="bl">
-                  <li class="imp">Increased production by 17%</li>
-                  <li class="imp">Reduced variance by 12%</li>
-                </ul>
-              </div>
-              <div>
-                <p class="cl-label">Tools</p>
-                <div class="tags">
-                  <span class="tag">Lean / Six Sigma</span><span class="tag">Python</span><span class="tag">Power BI</span>
-                </div>
-              </div>
+        <div class="divider"></div>
+        <div class="cols">
+          <div>
+            <p class="col-lbl">Impact</p>
+            <ul class="blist">
+              <li class="g">PM process improved 3×</li>
+              <li class="g">+80% on-time completion</li>
+            </ul>
+          </div>
+          <div>
+            <p class="col-lbl">Tools</p>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">Power Automate</span>
+              <span class="tag">Spotfire</span><span class="tag">Correlation</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ASML -->
-      <div class="tl-item">
-        <div class="tl-left">
-          <div class="tl-logo"><img src="asml.png" alt="ASML" onerror="this.style.display='none'"></div>
+      <div class="card">
+        <div class="card-top">
+          <div class="c-logo"><img src="rbc.png" alt="RBC" onerror="this.style.display='none'"></div>
+          <div class="c-info">
+            <h4>Robert Bosch Centre for DS &amp; AI</h4>
+            <p class="role">Project Associate</p>
+            <p class="sup">Supervisor: <a href="https://doms.iitm.ac.in/index.php/nandan-s" target="_blank">Nandan Sudarsanam</a></p>
+          </div>
         </div>
-        <div class="tl-dot"></div>
-        <div class="tl-right">
-          <div class="tl-card">
-            <div class="ch">
-              <div>
-                <h4>ASML</h4>
-                <p class="role">Data Analytics Intern</p>
-                <p class="sup">Supervisor: <a href="#">Dylan Holton</a></p>
-              </div>
-            </div>
-            <div class="cb">
-              <div>
-                <p class="cl-label">Impact</p>
-                <ul class="bl">
-                  <li class="imp">Improved PM process 3×</li>
-                  <li class="imp">+80% on-time PM completion rate</li>
-                </ul>
-              </div>
-              <div>
-                <p class="cl-label">Tools</p>
-                <div class="tags">
-                  <span class="tag">Python</span><span class="tag">Power Automate</span>
-                  <span class="tag">Spotfire</span><span class="tag">Correlation</span>
-                </div>
-              </div>
+        <div class="divider"></div>
+        <div class="cols">
+          <div>
+            <p class="col-lbl">Impact</p>
+            <ul class="blist">
+              <li class="g">Knowledge Graph replaced month-long reconciliation</li>
+              <li class="g">+15% click-through rate</li>
+            </ul>
+          </div>
+          <div>
+            <p class="col-lbl">Tools</p>
+            <div class="tags">
+              <span class="tag">PyTorch</span><span class="tag">Keras</span>
+              <span class="tag">Contextual Bandit</span><span class="tag">ARIMA</span>
+              <span class="tag">Deep-AR</span><span class="tag">CART</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Robert Bosch Centre -->
-      <div class="tl-item">
-        <div class="tl-left">
-          <div class="tl-logo"><img src="rbc.png" alt="RBC" onerror="this.style.display='none'"></div>
+      <div class="card">
+        <div class="card-top">
+          <div class="c-logo"><img src="bauer.jpeg" alt="Bauer" onerror="this.style.display='none'"></div>
+          <div class="c-info">
+            <h4>Bauer College of Business, UH</h4>
+            <p class="role">Instructional Assistant</p>
+            <p class="sup">Supervisor: <a href="https://www.bauer.uh.edu/search/directory/profile.asp?firstname=Ravi&lastname=Aron" target="_blank">Ravi Aron</a></p>
+          </div>
         </div>
-        <div class="tl-dot"></div>
-        <div class="tl-right">
-          <div class="tl-card">
-            <div class="ch">
-              <div>
-                <h4>Robert Bosch Centre for DS &amp; AI</h4>
-                <p class="role">Project Associate</p>
-                <p class="sup">Supervisor: <a href="https://doms.iitm.ac.in/index.php/nandan-s" target="_blank">Nandan Sudarsanam</a></p>
-              </div>
-            </div>
-            <div class="cb">
-              <div>
-                <p class="cl-label">Impact</p>
-                <ul class="bl">
-                  <li class="imp">Replaced month-long reconciliation with Knowledge Graph</li>
-                  <li class="imp">+15% click-through rate</li>
-                </ul>
-              </div>
-              <div>
-                <p class="cl-label">Tools</p>
-                <div class="tags">
-                  <span class="tag">PyTorch</span><span class="tag">Keras</span>
-                  <span class="tag">Contextual Bandit</span><span class="tag">ARIMA</span>
-                  <span class="tag">Deep-AR</span><span class="tag">CART</span>
-                </div>
-              </div>
+        <div class="divider"></div>
+        <div class="cols">
+          <div>
+            <p class="col-lbl">Projects</p>
+            <ul class="blist">
+              <li>Experimental Design &amp; Market Research</li>
+            </ul>
+          </div>
+          <div>
+            <p class="col-lbl">Tools</p>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">STATA</span>
+              <span class="tag">Factor Analysis</span><span class="tag">Regression</span><span class="tag">VIF</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Bauer College -->
-      <div class="tl-item">
-        <div class="tl-left">
-          <div class="tl-logo"><img src="bauer.jpeg" alt="Bauer" onerror="this.style.display='none'"></div>
-        </div>
-        <div class="tl-dot"></div>
-        <div class="tl-right">
-          <div class="tl-card">
-            <div class="ch">
-              <div>
-                <h4>Bauer College of Business, UH</h4>
-                <p class="role">Instructional Assistant</p>
-                <p class="sup">Supervisor: <a href="https://www.bauer.uh.edu/search/directory/profile.asp?firstname=Ravi&lastname=Aron" target="_blank">Ravi Aron</a></p>
-              </div>
-            </div>
-            <div class="cb">
-              <div>
-                <p class="cl-label">Projects</p>
-                <ul class="bl">
-                  <li>Experimental Design &amp; Market Research</li>
-                </ul>
-              </div>
-              <div>
-                <p class="cl-label">Tools</p>
-                <div class="tags">
-                  <span class="tag">Python</span><span class="tag">STATA</span>
-                  <span class="tag">Factor Analysis</span><span class="tag">Regression</span><span class="tag">VIF</span>
-                </div>
-              </div>
-            </div>
+      <div class="card">
+        <div class="card-top">
+          <div class="c-logo"><img src="doms.png" alt="IITM" onerror="this.style.display='none'"></div>
+          <div class="c-info">
+            <h4>IIT Madras</h4>
+            <p class="role">Data Science Intern</p>
+            <p class="sup">Supervisor: <a href="https://doms.iitm.ac.in/index.php/rrm" target="_blank">Rahul Marathe</a></p>
           </div>
         </div>
-      </div>
-
-      <!-- IIT Madras -->
-      <div class="tl-item">
-        <div class="tl-left">
-          <div class="tl-logo"><img src="doms.png" alt="IITM" onerror="this.style.display='none'"></div>
-        </div>
-        <div class="tl-dot"></div>
-        <div class="tl-right">
-          <div class="tl-card">
-            <div class="ch">
-              <div>
-                <h4>IIT Madras</h4>
-                <p class="role">Data Science Intern</p>
-                <p class="sup">Supervisor: <a href="https://doms.iitm.ac.in/index.php/rrm" target="_blank">Rahul Marathe</a></p>
-              </div>
-            </div>
-            <div class="cb">
-              <div>
-                <p class="cl-label">Projects</p>
-                <ul class="bl">
-                  <li>Multivariate Regression, Clustering &amp; ANOVA</li>
-                </ul>
-              </div>
-              <div>
-                <p class="cl-label">Tools</p>
-                <div class="tags">
-                  <span class="tag">Python</span><span class="tag">SPSS-AMOS</span>
-                  <span class="tag">Clustering</span><span class="tag">ANOVA</span><span class="tag">KNN</span>
-                </div>
-              </div>
+        <div class="divider"></div>
+        <div class="cols">
+          <div>
+            <p class="col-lbl">Projects</p>
+            <ul class="blist">
+              <li>Multivariate Regression, Clustering &amp; ANOVA</li>
+            </ul>
+          </div>
+          <div>
+            <p class="col-lbl">Tools</p>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">SPSS-AMOS</span>
+              <span class="tag">Clustering</span><span class="tag">ANOVA</span><span class="tag">KNN</span>
             </div>
           </div>
         </div>
@@ -626,36 +664,28 @@ body{
     </div>
   </div>
 
-  <!-- Bottom strip -->
-  <div class="bottom-strip">
-    <button class="strip-btn" onclick="document.getElementById('recoModal').classList.add('open')">
-      <div class="strip-icon">
+  <!-- Action row -->
+  <div class="action-row">
+    <button class="act-btn" onclick="document.getElementById('recoModal').classList.add('open')">
+      <div class="act-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
       </div>
-      <div class="strip-txt">
-        <p>Recommendations</p>
-        <p>From supervisors &amp; colleagues</p>
-      </div>
+      <div class="act-txt"><strong>Recommendations</strong><span>Supervisors &amp; colleagues</span></div>
     </button>
-    <button class="strip-btn" onclick="document.getElementById('pubModal').classList.add('open')">
-      <div class="strip-icon">
+    <button class="act-btn" onclick="document.getElementById('pubModal').classList.add('open')">
+      <div class="act-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       </div>
-      <div class="strip-txt">
-        <p>Publication</p>
-        <p>Peer-reviewed research</p>
-      </div>
+      <div class="act-txt"><strong>Publication</strong><span>Peer-reviewed research</span></div>
     </button>
-    <button class="strip-btn" onclick="document.getElementById('cvModal').classList.add('open')">
-      <div class="strip-icon">
+    <button class="act-btn" onclick="document.getElementById('cvModal').classList.add('open')">
+      <div class="act-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><path d="M13 8h4M13 12h4M13 16h4"/></svg>
       </div>
-      <div class="strip-txt">
-        <p>Resume</p>
-        <p>Full CV &amp; work history</p>
-      </div>
+      <div class="act-txt"><strong>Resume</strong><span>Full CV &amp; work history</span></div>
     </button>
   </div>
+
 </main>
 
 <!-- MODALS -->
@@ -674,7 +704,7 @@ body{
   <div class="mbox" style="max-width:560px;text-align:center">
     <p class="mtitle">Publication</p>
     <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0268190" target="_blank">
-      <img src="paper.png" alt="Publication" style="width:80%;border-radius:8px;border:1px solid var(--border);margin:0 auto 16px;display:block">
+      <img src="paper.png" alt="Publication" style="width:78%;border-radius:8px;border:1px solid var(--rule);margin:0 auto 16px;display:block">
     </a>
     <button class="mclose" onclick="document.getElementById('pubModal').classList.remove('open')">Close</button>
   </div>
