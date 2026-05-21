@@ -28,15 +28,15 @@
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html { scroll-behavior: smooth; }
+        html, body { height: 100vh; overflow: hidden; }
 
         body {
             background: var(--bg);
             color: var(--text);
             font-family: 'Space Grotesk', sans-serif;
             font-size: 13px;
-            min-height: 100vh;
-            overflow-x: hidden;
+            height: 100vh;
+            overflow: hidden;
         }
 
         /* Atmospheric background */
@@ -67,7 +67,7 @@
         .layout {
             display: grid;
             grid-template-columns: 280px 1fr;
-            min-height: 100vh;
+            height: 100vh;
             position: relative;
             z-index: 1;
         }
@@ -78,21 +78,22 @@
         .sidebar {
             background: linear-gradient(180deg, rgba(12,16,24,0.98) 0%, rgba(8,12,20,0.98) 100%);
             border-right: 1px solid var(--border);
-            padding: 44px 24px 44px 28px;
+            padding: 22px 20px 22px 22px;
             display: flex;
             flex-direction: column;
-            gap: 32px;
+            gap: 16px;
             position: sticky;
             top: 0;
             height: 100vh;
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
         /* Profile photo — static, no spin */
         .profile-wrap {
             position: relative;
-            width: 88px;
-            height: 88px;
+            width: 64px;
+            height: 64px;
             margin: 0 auto;
         }
 
@@ -115,8 +116,8 @@
         }
 
         .profile-wrap img {
-            width: 88px;
-            height: 88px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
             object-fit: cover;
             position: relative;
@@ -148,10 +149,10 @@
 
         .name-block h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 20px;
+            font-size: 15px;
             font-weight: 700;
             letter-spacing: -0.01em;
-            line-height: 1.25;
+            line-height: 1.2;
             color: #eef0f5;
         }
 
@@ -188,7 +189,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            padding: 6px 13px;
+            padding: 4px 10px;
             border: 1px solid var(--border);
             border-radius: 6px;
             text-decoration: none;
@@ -217,7 +218,7 @@
         }
 
         /* Sidebar section */
-        .s-sec { display: flex; flex-direction: column; gap: 12px; }
+        .s-sec { display: flex; flex-direction: column; gap: 8px; }
 
         .s-label {
             font-size: 9px;
@@ -238,20 +239,24 @@
         }
 
         .about-text {
-            font-size: 12px;
-            line-height: 1.8;
+            font-size: 10.5px;
+            line-height: 1.6;
             color: var(--text2);
             font-weight: 300;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         /* Education items */
-        .edu-list { display: flex; flex-direction: column; gap: 2px; }
+        .edu-list { display: flex; flex-direction: column; gap: 0px; }
 
         .edu-item {
             display: flex;
             align-items: center;
             gap: 11px;
-            padding: 10px 10px;
+            padding: 5px 8px;
             border-radius: 8px;
             border: 1px solid transparent;
             transition: all 0.2s;
@@ -305,7 +310,7 @@
            MAIN CONTENT
         ══════════════════════════════ */
         .main {
-            padding: 48px 44px 80px;
+            padding: 20px 28px 16px;
         }
 
         /* Section title */
@@ -313,12 +318,12 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 28px;
+            margin-bottom: 6px;
         }
 
         .section-title h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 30px;
+            font-size: 20px;
             font-weight: 900;
             font-style: italic;
             color: var(--text);
@@ -335,8 +340,8 @@
         .exp-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 52px;
+            gap: 8px;
+            margin-bottom: 0;
         }
 
         /* Cards */
@@ -344,7 +349,7 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 22px 22px 20px;
+            padding: 11px 14px 10px;
             position: relative;
             overflow: hidden;
             transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s, background 0.25s;
@@ -405,14 +410,14 @@
         .card-head {
             display: flex;
             align-items: flex-start;
-            gap: 13px;
-            margin-bottom: 16px;
+            gap: 10px;
+            margin-bottom: 8px;
         }
 
         /* Logo: transparent, no box — image shows as-is */
         .card-logo {
-            width: 54px;
-            height: 54px;
+            width: 38px;
+            height: 38px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
@@ -448,7 +453,7 @@
         .card-meta { flex: 1; min-width: 0; }
 
         .card-meta h4 {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             color: var(--text);
             line-height: 1.2;
@@ -457,16 +462,16 @@
         .card-meta .role {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 12px;
+            font-size: 10.5px;
             color: var(--gold);
-            margin-top: 3px;
+            margin-top: 2px;
             font-weight: 400;
         }
 
         .card-meta .sup {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--text3);
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         .card-meta .sup a {
@@ -497,14 +502,14 @@
         .card-div {
             height: 1px;
             background: var(--border);
-            margin: 14px 0;
+            margin: 7px 0;
         }
 
         /* Two-column body */
         .card-body {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 10px;
         }
 
         .col-label {
@@ -513,18 +518,18 @@
             letter-spacing: 0.18em;
             text-transform: uppercase;
             color: var(--text3);
-            margin-bottom: 9px;
+            margin-bottom: 5px;
         }
 
         .bullet-list {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 3px;
         }
 
         .bullet-list li {
-            font-size: 11px;
+            font-size: 10px;
             color: #8da0b4;
             padding-left: 14px;
             position: relative;
@@ -545,15 +550,15 @@
         .impact-li { color: #a2c98a !important; }
 
         /* Skill tags */
-        .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+        .tags { display: flex; flex-wrap: wrap; gap: 3px; }
 
         .tag {
-            padding: 3px 9px;
+            padding: 2px 7px;
             background: rgba(74,158,255,0.06);
             border: 1px solid rgba(74,158,255,0.12);
             border-radius: 4px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 9.5px;
+            font-size: 8.5px;
             color: #6aadee;
             white-space: nowrap;
             letter-spacing: 0.01em;
@@ -571,7 +576,7 @@
         .actions-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 8px;
             margin-top: 8px;
         }
 
@@ -579,13 +584,13 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 22px 18px 18px;
+            padding: 10px 14px 10px;
             cursor: pointer;
             transition: all 0.22s;
             text-align: left;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 4px;
         }
 
         .action-btn:hover {
@@ -596,9 +601,9 @@
         }
 
         .btn-icon-wrap {
-            width: 34px;
-            height: 34px;
-            border-radius: 8px;
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
             background: var(--blue-dim);
             border: 1px solid rgba(74,158,255,0.15);
             display: flex;
@@ -606,17 +611,17 @@
             justify-content: center;
         }
 
-        .btn-icon-wrap svg { width: 16px; height: 16px; color: var(--blue); }
+        .btn-icon-wrap svg { width: 12px; height: 12px; color: var(--blue); }
 
         .btn-label {
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 600;
             color: var(--text);
             letter-spacing: 0.01em;
         }
 
         .btn-desc {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--text3);
             font-weight: 400;
         }
@@ -747,7 +752,7 @@
             </a>
         </div>
 
-        <p class="email-tag">venkatesh23997@gmail.com</p>
+        <p class="email-tag">vsharma@ryderscott.com</p>
 
         <div class="s-sec">
             <p class="s-label">About</p>
