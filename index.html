@@ -266,26 +266,25 @@
         .logo-box {
             width: 38px;
             height: 38px;
-            border-radius: 8px;
-            background: var(--surface);
-            border: 1px solid var(--border);
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            overflow: hidden;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 11px;
-            color: var(--gold);
-            letter-spacing: 0.01em;
+            background: transparent;
+            border: none;
         }
-
         .logo-box img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            padding: 5px;
+            filter: drop-shadow(0 1px 4px rgba(0,0,0,0.4));
+        }
+        .logo-box .fb {
+            display: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--text3);
         }
 
         .edu-text p:first-child {
@@ -410,27 +409,41 @@
             margin-bottom: 16px;
         }
 
+        /* Logo: transparent, no box — image shows as-is */
         .card-logo {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 54px;
+            height: 54px;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            text-align: center;
-            line-height: 1;
-            position: relative;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
         }
-        .card-logo.logo-rsc  { background: linear-gradient(135deg,#1a1000,#2e1f00); color:#e8b84b; border:1px solid rgba(232,184,75,0.28); box-shadow:0 0 20px rgba(232,184,75,0.1); }
-        .card-logo.logo-ep   { background: linear-gradient(135deg,#001020,#002240); color:#4a9eff; border:1px solid rgba(74,158,255,0.25); box-shadow:0 0 20px rgba(74,158,255,0.09); }
-        .card-logo.logo-grl  { background: linear-gradient(135deg,#0d1a0d,#162814); color:#6fcf8a; border:1px solid rgba(111,207,138,0.22); box-shadow:0 0 20px rgba(111,207,138,0.08); }
-        .card-logo.logo-asml { background: linear-gradient(135deg,#100015,#1e0030); color:#c084fc; border:1px solid rgba(192,132,252,0.22); box-shadow:0 0 20px rgba(192,132,252,0.08); }
-        .card-logo.logo-rbc  { background: linear-gradient(135deg,#150005,#280010); color:#f87171; border:1px solid rgba(248,113,113,0.22); box-shadow:0 0 20px rgba(248,113,113,0.08); }
-        .card-logo.logo-bcb  { background: linear-gradient(135deg,#0a0a00,#1a1a00); color:#facc15; border:1px solid rgba(250,204,21,0.22); box-shadow:0 0 20px rgba(250,204,21,0.08); }
-        .card-logo.logo-iit  { background: linear-gradient(135deg,#001015,#001e28); color:#22d3ee; border:1px solid rgba(34,211,238,0.22); box-shadow:0 0 20px rgba(34,211,238,0.08); }
-        .card-logo .mono { font-family:'JetBrains Mono',monospace; font-weight:600; font-size:10.5px; letter-spacing:0.05em; }
-        .card-logo .serif { font-family:'Playfair Display',serif; font-weight:900; font-size:13px; }
+        .card-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)) brightness(1.08);
+        }
+        /* Fallback text badge shown only when image fails */
+        .card-logo .fb {
+            display: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 10px;
+            letter-spacing: 0.05em;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text2);
+        }
 
         .card-meta { flex: 1; min-width: 0; }
 
@@ -746,7 +759,7 @@
             <div class="edu-list">
                 <div class="edu-item">
                     <div class="logo-box">
-                        <img src="uh.png" alt="UH" onerror="this.style.display='none'; this.parentElement.innerHTML='UH'">
+                        <img src="uh.png" alt="UH" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">UH</span>
                     </div>
                     <div class="edu-text">
                         <p>University of Houston</p>
@@ -755,7 +768,7 @@
                 </div>
                 <div class="edu-item">
                     <div class="logo-box">
-                        <img src="vtu.png" alt="VTU" onerror="this.style.display='none'; this.parentElement.innerHTML='VTU'">
+                        <img src="vtu.png" alt="VTU" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">VTU</span>
                     </div>
                     <div class="edu-text">
                         <p>Visvesvaraya Technological Univ.</p>
@@ -780,7 +793,7 @@
             <!-- Ryder Scott — FEATURED -->
             <div class="card featured">
                 <div class="card-head">
-                    <div class="card-logo logo-rsc"><span class="serif">RSC</span></div>
+                    <div class="card-logo"><img src="rydersco.png" alt="Ryder Scott" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">RSC</span></div>
                     <div class="card-meta">
                         <h4>Ryder Scott Company</h4>
                         <p class="role">Data Scientist</p>
@@ -817,7 +830,7 @@
             <!-- EnPro -->
             <div class="card">
                 <div class="card-head">
-                    <div class="card-logo logo-ep"><span class="mono">EnPro</span></div>
+                    <div class="card-logo"><img src="enpro.png" alt="EnPro" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">EP</span></div>
                     <div class="card-meta">
                         <h4>EnPro Industries</h4>
                         <p class="role">Product Owner Intern</p>
@@ -851,7 +864,7 @@
             <!-- Garlock -->
             <div class="card">
                 <div class="card-head">
-                    <div class="card-logo logo-grl"><span class="serif">GRL</span></div>
+                    <div class="card-logo"><img src="garlock.png" alt="Garlock" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">GRL</span></div>
                     <div class="card-meta">
                         <h4>Garlock</h4>
                         <p class="role">Industrial Engineering &amp; Analytics Intern</p>
@@ -881,7 +894,7 @@
             <!-- ASML -->
             <div class="card">
                 <div class="card-head">
-                    <div class="card-logo logo-asml"><span class="mono">ASML</span></div>
+                    <div class="card-logo"><img src="asml.png" alt="ASML" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">ASML</span></div>
                     <div class="card-meta">
                         <h4>ASML</h4>
                         <p class="role">Data Analytics Intern</p>
@@ -912,7 +925,7 @@
             <!-- Robert Bosch Centre -->
             <div class="card">
                 <div class="card-head">
-                    <div class="card-logo logo-rbc"><span class="mono">RBC</span></div>
+                    <div class="card-logo"><img src="rbc.png" alt="RBC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">RBC</span></div>
                     <div class="card-meta">
                         <h4>Robert Bosch Centre for DS &amp; AI</h4>
                         <p class="role">Project Associate</p>
@@ -945,7 +958,7 @@
             <!-- Bauer College -->
             <div class="card">
                 <div class="card-head">
-                    <div class="card-logo logo-bcb"><span class="serif">BCB</span></div>
+                    <div class="card-logo"><img src="bauer.jpeg" alt="Bauer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">BCB</span></div>
                     <div class="card-meta">
                         <h4>Bauer College of Business, UH</h4>
                         <p class="role">Instructional Assistant</p>
@@ -976,7 +989,7 @@
             <!-- IIT Madras -->
             <div class="card">
                 <div class="card-head">
-                    <div class="card-logo logo-iit"><span class="mono">IITM</span></div>
+                    <div class="card-logo"><img src="doms.png" alt="IIT Madras" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="fb">IITM</span></div>
                     <div class="card-meta">
                         <h4>IIT Madras</h4>
                         <p class="role">Data Science Intern</p>
