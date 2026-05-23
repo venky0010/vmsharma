@@ -54,7 +54,7 @@ body{
 /* big decorative number behind photo */
 .sb-hero{
   position:relative;
-  padding:28px 28px 0;
+  padding:24px 28px 0;
   flex-shrink:0;
 }
 .sb-hero::before{
@@ -65,10 +65,10 @@ body{
 }
 
 /* photo + name side by side */
-.identity{display:flex;align-items:flex-start;gap:16px;position:relative;z-index:1}
+.identity{display:flex;flex-direction:column;align-items:flex-start;gap:12px;position:relative;z-index:1}
 .photo-frame{
-  width:78px;height:78px;flex-shrink:0;
-  border-radius:12px;overflow:hidden;
+  width:110px;height:110px;flex-shrink:0;
+  border-radius:14px;overflow:hidden;
   border:1px solid var(--rulehi);
   position:relative;
 }
@@ -81,13 +81,12 @@ body{
 .name-block{flex:1;min-width:0}
 .name-block h1{
   font-family:'Cormorant',serif;
-  font-size:26px;font-weight:600;line-height:1.1;
+  font-size:32px;font-weight:600;line-height:1.05;
   color:#eef1f8;letter-spacing:-0.02em;
 }
-.name-block h1 em{font-style:italic;color:var(--gold2)}
 .tagline{
-  font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--gold);margin-top:7px;
+  font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold);margin-top:8px;
 }
 .loc-row{
   display:flex;align-items:center;gap:5px;
@@ -136,15 +135,15 @@ body{
 .sb-body::-webkit-scrollbar{width:0}
 
 .sec-hd{
-  font-size:8.5px;font-weight:700;letter-spacing:.2em;
+  font-size:10px;font-weight:700;letter-spacing:.18em;
   text-transform:uppercase;color:var(--txt3);
-  margin-bottom:10px;display:flex;align-items:center;gap:8px;
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
 }
 .sec-hd::after{content:'';flex:1;height:1px;background:var(--rule)}
 
 .about-text{
   font-family:'Cormorant',serif;
-  font-size:14.5px;line-height:1.75;color:#8a97ab;
+  font-size:16px;line-height:1.75;color:#8a97ab;
   font-weight:300;
 }
 
@@ -157,12 +156,12 @@ body{
 }
 .edu-item:hover{background:var(--ink3);border-color:var(--rule)}
 .edu-logo{
-  width:38px;height:38px;flex-shrink:0;
+  width:48px;height:48px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
 }
 .edu-logo img{width:100%;height:100%;object-fit:contain;filter:brightness(1.1) drop-shadow(0 1px 3px rgba(0,0,0,.5))}
-.edu-text p:first-child{font-size:11.5px;font-weight:600;color:var(--txt)}
-.edu-text p:last-child{font-size:9.5px;color:var(--txt3);margin-top:1px}
+.edu-text p:first-child{font-size:13px;font-weight:600;color:var(--txt)}
+.edu-text p:last-child{font-size:11px;color:var(--txt3);margin-top:2px}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    MAIN — bento experience grid
@@ -183,7 +182,7 @@ body{
 .topbar-left{display:flex;align-items:baseline;gap:14px}
 .topbar-left h2{
   font-family:'Cormorant',serif;font-style:italic;
-  font-size:28px;font-weight:300;color:var(--txt);letter-spacing:-.01em;
+  font-size:34px;font-weight:300;color:var(--txt);letter-spacing:-.01em;
 }
 .exp-count{
   font-family:'DM Mono',monospace;font-size:10px;
@@ -254,7 +253,7 @@ body{
 /* card internals shared */
 .card-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
 .c-logo{
-  width:58px;height:58px;flex-shrink:0;
+  width:72px;height:72px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
 }
 .c-logo img{
@@ -262,12 +261,12 @@ body{
   filter:brightness(1.1) drop-shadow(0 1px 4px rgba(0,0,0,.5));
 }
 .c-info{flex:1;min-width:0}
-.c-info h4{font-size:13px;font-weight:700;color:#e8ecf4;line-height:1.2}
+.c-info h4{font-size:15px;font-weight:700;color:#e8ecf4;line-height:1.2}
 .c-info .role{
   font-family:'Cormorant',serif;font-style:italic;
-  font-size:12px;color:var(--gold);font-weight:300;margin-top:2px;
+  font-size:14px;color:var(--gold);font-weight:300;margin-top:2px;
 }
-.c-info .sup{font-size:9.5px;color:var(--txt3);margin-top:3px}
+.c-info .sup{font-size:11px;color:var(--txt3);margin-top:4px}
 .c-info .sup a{color:var(--blue);text-decoration:none}
 .c-info .sup a:hover{text-decoration:underline}
 
@@ -283,13 +282,13 @@ body{
 
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .col-lbl{
-  font-size:8.5px;font-weight:700;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--txt3);margin-bottom:7px;
+  font-size:10px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--txt3);margin-bottom:8px;
 }
 .blist{list-style:none;display:flex;flex-direction:column;gap:4px}
 .blist li{
-  font-size:11px;color:#7a8a9e;padding-left:13px;
-  position:relative;line-height:1.5;font-weight:400;
+  font-size:12.5px;color:#7a8a9e;padding-left:14px;
+  position:relative;line-height:1.55;font-weight:400;
 }
 .blist li::before{
   content:'';position:absolute;left:0;top:7px;
@@ -302,15 +301,15 @@ body{
   padding:2px 8px;border-radius:4px;
   background:rgba(91,164,212,0.07);
   border:1px solid rgba(91,164,212,0.12);
-  font-family:'DM Mono',monospace;font-size:8.5px;
+  font-family:'DM Mono',monospace;font-size:9.5px;
   color:#6ea8d4;transition:all .15s;white-space:nowrap;
 }
 .tag:hover{background:rgba(91,164,212,0.14);border-color:rgba(91,164,212,.24)}
 
 /* featured card bigger logo and text */
-.card-featured .c-logo{width:68px;height:68px}
-.card-featured .c-info h4{font-size:16px}
-.card-featured .c-info .role{font-size:14px}
+.card-featured .c-logo{width:86px;height:86px}
+.card-featured .c-info h4{font-size:19px}
+.card-featured .c-info .role{font-size:16px}
 .card-featured .cols{grid-template-columns:1fr 1.3fr}
 
 /* bottom action row */
@@ -396,7 +395,7 @@ body{
         <img src="myimage.jpeg" alt="Venkatesh" onerror="this.style.display='none'">
       </div>
       <div class="name-block">
-        <h1>Venkatesh<br><em>Mohan Sharma</em></h1>
+        <h1>Venkatesh<br>Mohan Sharma</h1>
         <p class="tagline">Data Scientist · Engineer</p>
         <p class="loc-row">
           <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
@@ -538,7 +537,6 @@ body{
             <p class="col-lbl">Impact</p>
             <ul class="blist">
               <li class="g">↑ Production by 17%</li>
-              <li class="g">↓ Variance by 12%</li>
             </ul>
           </div>
           <div>
